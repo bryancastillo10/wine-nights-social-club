@@ -13,6 +13,11 @@ import Heart from './Heart'
 import Image from './Image'
 import Location from './Location'
 import Lock from './Lock'
+import Logout from './Logout'
+import Mail from './Mail'
+import Search from './Search'
+import Send from './Send'
+import ThreeDotHorizontal from './ThreeDotHorizontal'
 
 
 const icons = {
@@ -27,7 +32,12 @@ const icons = {
   heart: Heart,
   image: Image,
   location: Location,
-  lock: Lock
+  lock: Lock,
+  logout: Logout,
+  threeDotHorizontal: ThreeDotHorizontal,
+  mail: Mail,
+  search: Search,
+  send: Send
 }
 
 interface IIcon {
