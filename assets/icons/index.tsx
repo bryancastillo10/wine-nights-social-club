@@ -1,6 +1,5 @@
 import { theme } from '@/constants/theme'
 
-
 import Home from './Home'
 import ArrowRight from './ArrowRight'
 import ArrowLeft from './ArrowLeft'
@@ -18,7 +17,10 @@ import Mail from './Mail'
 import Search from './Search'
 import Send from './Send'
 import ThreeDotHorizontal from './ThreeDotHorizontal'
-
+import ThreeDotVertical from './ThreeDotVertical'
+import Video from './Video'
+import User from './User'
+import Share from './Share'
 
 const icons = {
   home: Home,
@@ -35,9 +37,13 @@ const icons = {
   lock: Lock,
   logout: Logout,
   threeDotHorizontal: ThreeDotHorizontal,
+  threeDotVertical: ThreeDotVertical,
   mail: Mail,
   search: Search,
-  send: Send
+  send: Send,
+  share: Share,
+  user: User,
+  video: Video,
 }
 
 interface IIcon {
