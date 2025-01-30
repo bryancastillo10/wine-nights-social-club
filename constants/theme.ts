@@ -21,6 +21,10 @@ export const theme = {
         bold: "700" as FontWeight,
         extraBold: "800" as FontWeight
     },
+    fontFamily: {
+        primary: "Poppins",
+        secondary:"Oswald"
+    },
     radius: {
         xs: 10,
         sm: 12,

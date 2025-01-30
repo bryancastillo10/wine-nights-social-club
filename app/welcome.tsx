@@ -69,16 +69,17 @@ const styles = StyleSheet.create({
         width: wp(100)
     },
     title: {
-        textAlign:'center',
-        color: theme.colors.text,
-        fontWeight: theme.fonts.extraBold,
-        fontSize: hp(3.2)
+      textAlign:'center',
+      color: theme.colors.text,
+      fontWeight: theme.fonts.extraBold,
+      fontSize: hp(3.5),
+      fontFamily:"Oswald"
     },
     caption: {
-        textAlign: 'center',
-        paddingHorizontal: wp(10),
-        fontSize: hp(1.7),
-         color: theme.colors.text,
+      textAlign: 'center',
+      paddingHorizontal: wp(10),
+      fontSize: hp(1.7),
+      color: theme.colors.text,
     },
     footer: {
         gap: 30,
