@@ -1,0 +1,55 @@
+import { theme } from '@/constants/theme'
+
+
+import Home from './Home'
+import ArrowRight from './ArrowRight'
+import ArrowLeft from './ArrowLeft'
+import Call from './Call'
+import Comment from './Comment'
+import Camera from './Camera'
+import Edit from './Edit'
+import Delete from './Delete'
+import Heart from './Heart'
+import Image from './Image'
+import Location from './Location'
+import Lock from './Lock'
+
+
+const icons = {
+  home: Home,
+  arrowLeft: ArrowLeft,
+  arrowRight: ArrowRight,
+  call: Call,
+  comment: Comment,
+  camera: Camera,
+  edit: Edit,
+  delete: Delete,
+  heart: Heart,
+  image: Image,
+  location: Location,
+  lock: Lock
+}
+
+interface IIcon {
+  name: keyof typeof icons
+  height?: number
+  width?: number
+  strokeWidth?: number
+  color?: string
+}
+
+const Icon = ({ name, ...props }: IIcon) => {
+  const IconComponent = icons[name]
+  
+  return (
+      <IconComponent
+        height={props.height || 24}
+        width={props.width || 24}
+        strokeWidth={props.strokeWidth || 1.9}
+        color={theme.colors.textLight}
+        {...props}
+      />
+  )
+}
+
+export default Icon
