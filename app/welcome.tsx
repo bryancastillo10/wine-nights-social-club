@@ -1,5 +1,6 @@
 import { View, Text, Image, Pressable, StyleSheet} from 'react-native'
 import { StatusBar } from "expo-status-bar"
+import { useRouter } from 'expo-router';
 
 import ScreenWrapper from '@/components/ScreenWrapper';
 import CustomButton from '@/components/CustomButton';
@@ -8,6 +9,8 @@ import { wp, hp } from '@/utils/common';
 
 const Welcome = () => {
   const welcomeImg = "../assets/images/welcome.png";
+  const router = useRouter();
+  
   return (
     <ScreenWrapper bg="#f4f3f2">
           <StatusBar style="dark" />
@@ -31,13 +34,13 @@ const Welcome = () => {
                   <CustomButton
                     title="Get Started"
                     buttonStyle={{marginHorizontal: wp(3)}}
-                    onPress={() => {}}
+                    onPress={() => router.push('/signUp')}
                   />
                   <View style={styles.bottomTextContainer}>
                       <Text style={styles.loginText}>
                           Already have an account?
                       </Text>
-                      <Pressable>
+                      <Pressable onPress={() => router.push('/logIn')}>
                           <Text style={[styles.loginText,
                               {
                                 color: theme.colors.primaryDark,
@@ -69,16 +72,17 @@ const styles = StyleSheet.create({
         width: wp(100)
     },
     title: {
-        textAlign:'center',
-        color: theme.colors.text,
-        fontWeight: theme.fonts.extraBold,
-        fontSize: hp(3.2)
+      textAlign:'center',
+      color: theme.colors.text,
+      fontWeight: theme.fonts.extraBold,
+      fontSize: hp(3.5),
+      fontFamily:"Oswald"
     },
     caption: {
-        textAlign: 'center',
-        paddingHorizontal: wp(10),
-        fontSize: hp(1.7),
-         color: theme.colors.text,
+      textAlign: 'center',
+      paddingHorizontal: wp(10),
+      fontSize: hp(1.7),
+      color: theme.colors.text,
     },
     footer: {
         gap: 30,
