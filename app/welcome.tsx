@@ -12,7 +12,7 @@ const Welcome = () => {
   const router = useRouter();
   
   return (
-    <ScreenWrapper bg="#f4f3f2">
+    <ScreenWrapper bg="#F5F5DC">
           <StatusBar style="dark" />
           <View style={styles.container}>
             {/* Welcome Image */}

@@ -5,7 +5,7 @@ import { theme } from '@/constants/theme';
 import Loading from './Loading';
 
 interface ICustomButton {
-    buttonStyle: { [x: string]: number | string };
+    buttonStyle?: { [x: string]: number | string };
     textStyle?: { [x: string]: number | string}
     title: string;
     onPress?: () => void;
