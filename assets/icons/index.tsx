@@ -48,8 +48,7 @@ const icons = {
 
 interface IIcon {
   name: keyof typeof icons
-  height?: number
-  width?: number
+  size?: number;
   strokeWidth?: number
   color?: string
 }
@@ -59,8 +58,8 @@ const Icon = ({ name, ...props }: IIcon) => {
   
   return (
       <IconComponent
-        height={props.height || 24}
-        width={props.width || 24}
+        height={props.size || 24}
+        width={props.size || 24}
         strokeWidth={props.strokeWidth || 1.9}
         color={theme.colors.textLight}
         {...props}
