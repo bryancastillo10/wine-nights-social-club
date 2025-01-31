@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View, Alert } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
@@ -12,22 +12,45 @@ import { theme } from '@/constants/theme';
 import { wp, hp } from '@/utils/common';
 import CustomButton from '@/components/CustomButton';
 
+interface UserLogin {
+  email: string;
+  password: string;
+}
+
 const LogIn = () => {
   const router = useRouter();
   
-  const emailRef = useRef("");
-  const passwordRef = useRef("");
+  const [loginData, setLoginData] = useState<UserLogin>({
+    email: "",
+    password: ""
+  })
   
   const [loading, setLoading] = useState<boolean>(false);
   
-  const handleSubmit = async () => {
-    if (!emailRef || !passwordRef) {
-      Alert.alert("Login", "Please fill all the required fields")
-    }
-    
-    // setLoading(true);
-    // API call here
+  const onChangeText = (field: keyof UserLogin, val: string) => {
+    setLoginData((prev) => ({
+        ...prev,
+        [field] : val
+    }));
   };
+  
+    const handleSubmit = async () => {
+    if (!loginData.email || !loginData.password) {
+      Alert.alert('Login', 'Please fill all the required fields');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // API call logic here
+      console.log('Submitting:', loginData);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   
   return (
     <ScreenWrapper bg="#F5F5DC">
@@ -49,14 +72,16 @@ const LogIn = () => {
               <Input
                 icon={<Icon name="mail" size={26} strokeWidth={1.6} />}
                 placeholder="Enter your email"
-                onChangeText={(value:string) => emailRef.current = value}
+                value={loginData.email}
+                onChangeText={(value:string) => onChangeText('email',value)}
               />
               
               <Input
                 icon={<Icon name="lock" size={26} strokeWidth={1.6} />}
                 secureTextEntry
                 placeholder="Enter your password"
-                onChangeText={(value:string) => passwordRef.current = value}
+                value={loginData.password}
+                onChangeText={(value:string) => onChangeText('password', value)}
               />
             <Text style={styles.forgotPassword}>
               Forgot Password?

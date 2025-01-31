@@ -6,13 +6,15 @@ import { hp } from '@/utils/common';
 export interface IInput extends TextInputProps {
     containerStyle?: ViewStyle;
     icon?: React.ReactNode;
-    inputRef?: React.RefObject<TextInput>;
+    value: string;
+    onChangeText: (value: string) => void;
 }
 
 const Input = ({
         containerStyle,
         icon: Icon,
-        inputRef,
+        value,
+        onChangeText,
         ...props
     }: IInput) => {
   return (
@@ -24,8 +26,9 @@ const Input = ({
         {Icon}
         <TextInput
             style={styles.input}
+            value={value}
+            onChangeText={onChangeText}
             placeholderTextColor={theme.colors.textLight}
-            ref={inputRef}
             {...props}
         />  
     </View>
@@ -49,5 +52,6 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
+        height:hp(4.5),
     }
 })
