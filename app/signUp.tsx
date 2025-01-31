@@ -91,13 +91,9 @@ const SignUp = () => {
                 value={SignUpData.password}
                 onChangeText={(value:string) => onChangeText('password', value)}
               />
-            <Text style={styles.forgotPassword}>
-              Forgot Password?
-            </Text>
-
             {/* SignUp Button */}
             <CustomButton
-              title="SignUp"
+              title="Sign Up"
               loading={loading}
               onPress={handleSubmit}
             />
@@ -108,7 +104,7 @@ const SignUp = () => {
             <Text style={styles.footerText}>
               Already have an account?
             </Text>
-            <Pressable>
+            <Pressable onPress={() => router.push("/logIn")}>
               <Text 
                 style={[styles.footerText, {
                   color: theme.colors.primary,
@@ -143,11 +139,6 @@ const styles = StyleSheet.create({
   formText: {
     fontSize: hp(1.75),
     color: theme.colors.text
-  },
-  forgotPassword: {
-    textAlign: 'right',
-    color: theme.colors.text,
-    fontWeight: theme.fonts.bold
   },
   footer: {
     flexDirection: 'row',
