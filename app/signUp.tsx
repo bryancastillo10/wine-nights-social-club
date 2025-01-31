@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Pressable, StyleSheet, Text, View, Alert } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
 
@@ -11,49 +10,19 @@ import Icon from '@/assets/icons';
 import { theme } from '@/constants/theme';
 import { wp, hp } from '@/utils/common';
 import CustomButton from '@/components/CustomButton';
+import useSignUp from '@/hooks/useSignUp';
 
-interface UserSignUp {
-  username: string;
-  email: string;
-  password: string;
-}
 
 const SignUp = () => {
   const router = useRouter();
   
-  const [SignUpData, setSignUpData] = useState<UserSignUp>({
-    username:"",
-    email: "",
-    password: ""
-  })
-  
-  const [loading, setLoading] = useState<boolean>(false);
-  
-  const onChangeText = (field: keyof UserSignUp, val: string) => {
-    setSignUpData((prev) => ({
-        ...prev,
-        [field] : val
-    }));
-  };
-  
-    const handleSubmit = async () => {
-    if (!SignUpData.email || !SignUpData.password) {
-      Alert.alert('SignUp', 'Please fill all the required fields');
-      return;
-    }
+  const {
+    signUpData,
+    loading,
+    onChangeText,
+    handleSubmit
+  } = useSignUp();
 
-    setLoading(true);
-    try {
-      // API call logic here
-      console.log('Submitting:', SignUpData);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  
   return (
     <ScreenWrapper bg="#F5F5DC">
         <StatusBar style="dark" />
@@ -74,13 +43,13 @@ const SignUp = () => {
               <Input
                 icon={<Icon name="user" size={26} strokeWidth={1.6} />}
                 placeholder="Enter your username"
-                value={SignUpData.username}
+                value={signUpData.username}
                 onChangeText={(value:string) => onChangeText('username',value)}
               />
               <Input
                 icon={<Icon name="mail" size={26} strokeWidth={1.6} />}
                 placeholder="Enter your email"
-                value={SignUpData.email}
+                value={signUpData.email}
                 onChangeText={(value:string) => onChangeText('email',value)}
               />
               
@@ -88,7 +57,7 @@ const SignUp = () => {
                 icon={<Icon name="lock" size={26} strokeWidth={1.6} />}
                 secureTextEntry
                 placeholder="Enter your password"
-                value={SignUpData.password}
+                value={signUpData.password}
                 onChangeText={(value:string) => onChangeText('password', value)}
               />
             {/* SignUp Button */}
