@@ -29,10 +29,17 @@ const useLogin = () => {
 
       setLoading(true);
       try {
-        await supabase.auth.signInWithPassword({
+        const { error } = await supabase.auth.signInWithPassword({
           email: loginData.email,
           password: loginData.password
         });
+        
+        if (error) {
+          Alert.alert('Login Failed', error.message);
+        } else {
+          Alert.alert('Login Successful');
+        }
+  
       } catch (error) {
         console.error(error);
         Alert.alert('Login Failed', 'Failed to login, server error');
