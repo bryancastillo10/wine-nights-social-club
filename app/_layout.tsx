@@ -4,7 +4,9 @@ import { useFonts } from 'expo-font';
 
 import { supabase } from "@/lib/supabase";
 import { AuthContextProvider, useAuth } from "@/context/AuthContext";
+
 import { findAuthUser } from "@/utils/findAuthUser";
+import { updateUserData } from "@/utils/updateUserData";
 
 SplashScreen.preventAutoHideAsync(); 
 
@@ -17,7 +19,7 @@ const _layout = () => {
 };
 
 const RootLayout = () => {
-  const { setAuth } = useAuth();
+  const { setAuth, setUserData } = useAuth();
   const router = useRouter();
   const [fontsLoaded] = useFonts({
     Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
@@ -29,7 +31,9 @@ const RootLayout = () => {
       (_event, session) => {
         if (session) {
           // Home Page
-          setAuth(findAuthUser(session?.user));
+          const mappedUser = findAuthUser(session?.user);
+          setAuth(mappedUser);
+          updateUserData(mappedUser, setUserData);
           router.replace("/home" as Href);
         } else {
           // Welcome Screen
@@ -43,7 +47,6 @@ const RootLayout = () => {
       authListener?.subscription.unsubscribe();
     };
   }, []);
-
   
   useEffect(() => {
     async function hideSplashScreen() {
