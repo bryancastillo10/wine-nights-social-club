@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Pressable, StyleSheet, Text, View, Alert } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
 
@@ -11,46 +10,17 @@ import Icon from '@/assets/icons';
 import { theme } from '@/constants/theme';
 import { wp, hp } from '@/utils/common';
 import CustomButton from '@/components/CustomButton';
+import useLogin from '@/hooks/useLogin';
 
-interface UserLogin {
-  email: string;
-  password: string;
-}
 
 const LogIn = () => {
   const router = useRouter();
-  
-  const [loginData, setLoginData] = useState<UserLogin>({
-    email: "",
-    password: ""
-  })
-  
-  const [loading, setLoading] = useState<boolean>(false);
-  
-  const onChangeText = (field: keyof UserLogin, val: string) => {
-    setLoginData((prev) => ({
-        ...prev,
-        [field] : val
-    }));
-  };
-  
-    const handleSubmit = async () => {
-    if (!loginData.email || !loginData.password) {
-      Alert.alert('Login', 'Please fill all the required fields');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      // API call logic here
-      console.log('Submitting:', loginData);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  const {
+    loginData,
+    loading,
+    onChangeText,
+    handleSubmit
+  } = useLogin();
   
   return (
     <ScreenWrapper bg="#F5F5DC">
