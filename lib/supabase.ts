@@ -2,10 +2,10 @@ import { AppState } from 'react-native'
 import 'react-native-url-polyfill/auto'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createClient } from '@supabase/supabase-js'
-import { EXPO_PUBLIC_SUPABASE_URL, EXPO_PUBLIC_SUPABASE_API_KEY } from "@env";
+import { EXPO_PUBLIC_SUPABASE_URL, EXPO_PUBLIC_SUPABASE_API_KEY } from 'react-native-dotenv'
 
-const supabaseUrl = EXPO_PUBLIC_SUPABASE_URL as string
-const supabaseAnonKey = EXPO_PUBLIC_SUPABASE_API_KEY as string
+const supabaseUrl = EXPO_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = EXPO_PUBLIC_SUPABASE_API_KEY
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
