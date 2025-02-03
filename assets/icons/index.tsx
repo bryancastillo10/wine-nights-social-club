@@ -21,6 +21,7 @@ import ThreeDotVertical from './ThreeDotVertical'
 import Video from './Video'
 import User from './User'
 import Share from './Share'
+import Bell from './Bell'
 
 const icons = {
   home: Home,
@@ -44,6 +45,7 @@ const icons = {
   share: Share,
   user: User,
   video: Video,
+  bell: Bell
 }
 
 interface IIcon {
