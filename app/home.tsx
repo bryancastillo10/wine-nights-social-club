@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { useRouter } from 'expo-router'
 
 import ScreenWrapper from '@/components/ScreenWrapper'
 import CustomButton from '@/components/CustomButton'
+import Icon from '@/assets/icons'
 
 import useLogout from '@/hooks/useLogout'
 import { wp, hp } from '@/utils/common'
@@ -9,11 +11,27 @@ import { theme } from '@/constants/theme'
 
 const Home = () => {
   const { handleLogout } = useLogout();
+  const router = useRouter();
   
   return (
     <ScreenWrapper bg="#F5F5DC">
-      <Text>Home Page is Here</Text>
-      <View style={{marginTop:24, width:wp(30)}}>
+      <View style={styles.container}>
+        <View style={styles.header}>x
+          <Text style={styles.title}>Wine Nights</Text>
+          <View style={styles.icons}>
+          <Pressable onPress={() => router.push("/notifications")}>
+              <Icon name="bell" size={hp(3.2)} strokeWidth={2} color={theme.colors.text} />
+          </Pressable>
+          <Pressable onPress={() => router.push("/newPost")}>
+              <Icon name="share" size={hp(3.2)} strokeWidth={2} color={theme.colors.text} />
+          </Pressable>
+          <Pressable onPress={() => router.push("/profile")}>
+              <Icon name="user" size={hp(3.2)} strokeWidth={2} color={theme.colors.text} />
+          </Pressable>
+        </View>
+        </View>
+      </View>
+      <View style={{margin:24, width:wp(30)}}>
         <CustomButton
           title="Logout"
           onPress={handleLogout}
@@ -53,6 +71,8 @@ const styles = StyleSheet.create({
   icons: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
+    gap: 18
   },
   listStyle: {
     paddingTop: 20,
