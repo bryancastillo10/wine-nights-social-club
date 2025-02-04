@@ -8,15 +8,19 @@ import Icon from '@/assets/icons'
 import useLogout from '@/hooks/useLogout'
 import { wp, hp } from '@/utils/common'
 import { theme } from '@/constants/theme'
+import Avatar from '@/components/Avatar'
+
+import { useAuth } from '@/context/AuthContext'
 
 const Home = () => {
+  const { user } = useAuth();
   const { handleLogout } = useLogout();
   const router = useRouter();
   
   return (
     <ScreenWrapper bg="#F5F5DC">
       <View style={styles.container}>
-        <View style={styles.header}>x
+        <View style={styles.header}>
           <Text style={styles.title}>Wine Nights</Text>
           <View style={styles.icons}>
           <Pressable onPress={() => router.push("/notifications")}>
@@ -26,7 +30,9 @@ const Home = () => {
               <Icon name="share" size={hp(3.2)} strokeWidth={2} color={theme.colors.text} />
           </Pressable>
           <Pressable onPress={() => router.push("/profile")}>
-              <Icon name="user" size={hp(3.2)} strokeWidth={2} color={theme.colors.text} />
+              <Avatar
+                source={user?.image}
+              />
           </Pressable>
         </View>
         </View>
