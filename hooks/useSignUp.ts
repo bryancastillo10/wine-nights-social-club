@@ -29,10 +29,10 @@ const useSignUp = () => {
       Alert.alert('SignUp', 'Please fill all the required fields');
       return;
     }
-
+      
     setLoading(true);
     try {
-      const { data : {session} } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
           email: signUpData.email,
           password: signUpData.password,
           options: {
@@ -41,7 +41,12 @@ const useSignUp = () => {
             }
           }
       });
-      console.log(session);
+      
+      if (error) {
+        console.error("Signup Error:", error.message);
+        Alert.alert("Signup Failed", error.message);
+        return;
+      }
       
     } catch (error) {
       console.error(error);
