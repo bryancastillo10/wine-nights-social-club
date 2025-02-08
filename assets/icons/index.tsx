@@ -22,6 +22,7 @@ import Video from './Video'
 import User from './User'
 import Share from './Share'
 import Bell from './Bell'
+import Drink from './Drink'
 
 const icons = {
   home: Home,
@@ -32,6 +33,7 @@ const icons = {
   camera: Camera,
   edit: Edit,
   delete: Delete,
+  drink: Drink,
   heart: Heart,
   image: Image,
   location: Location,

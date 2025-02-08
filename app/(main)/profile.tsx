@@ -20,7 +20,7 @@ interface IUserHeader {
 
 
 const Profile = () => {
-  const { user, setAuth } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
   
   return (
@@ -104,8 +104,8 @@ const UserHeader = ({ user, router }: IUserHeader) => {
             </View>
             
             <View style={styles.info}>
-              <Icon name="user" size={20} color={theme.colors.textLight} />
-              <Text style={styles.infoText}>{user?.phoneNumber || "Bio Not Provided"}</Text>
+              <Icon name="drink" size={20} color={theme.colors.textLight} />
+              <Text style={styles.infoText}>{user?.bio || "Bio Not Provided"}</Text>
             </View>
           </View>
         </View>
