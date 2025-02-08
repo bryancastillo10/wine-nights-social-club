@@ -1,12 +1,13 @@
 import { Alert } from "react-native";
 import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
+import * as ImagePicker from "expo-image-picker";
 
 import { useAuth } from "@/context/AuthContext";
 import { IUserData } from "@/context/auth.interface";
 
 import { updateUserData } from "@/service/user.service";
-import { getUserImgSource } from "@/service/image.service";
+import { getUserImgSource, uploadFile} from "@/service/image.service";
 
 const initialUserData = {
         username: '',
@@ -48,11 +49,16 @@ const useUpdateUserProfile = () => {
       };
         
     const handleSubmit = async () => {
-        const { username, phoneNumber, address, bio } = updateUser;
+        const { username, phoneNumber, address, bio, image } = updateUser;
         // Input Validation
         if (!username || !phoneNumber || !address || !bio) {
             Alert.alert("Edit Not Allowed", "Make sure all the fields are filled");
             return;
+        }
+        
+        // Upload Image
+        if (typeof image === 'object') {
+
         }
         
         // API Call
@@ -76,10 +82,22 @@ const useUpdateUserProfile = () => {
     
     
     const handlePickImage = async () => {
-          
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ['images'],
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+        
+        
+        if (!result.canceled) {
+            setUpdateUser({...user, image: result.assets[0].uri});
+        }
     };
     
-    const imageSource = getUserImgSource(updateUser.image);
+    const imageSource = user?.image && typeof user?.image === 'object' ?
+        user?.image :    
+        getUserImgSource(updateUser.image as string);
     
         return {
             updateUser,
