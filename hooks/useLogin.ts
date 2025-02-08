@@ -36,9 +36,7 @@ const useLogin = () => {
         
         if (error) {
           Alert.alert('Login Failed', error.message);
-        } else {
-          Alert.alert('Login Successful');
-        }
+        } 
   
       } catch (error) {
         console.error(error);
