@@ -5,95 +5,30 @@ import {
   View,
   Image,
   Pressable,
-  Alert
 } from 'react-native';
-import { useEffect, useState } from 'react';
 
-import { useAuth } from '@/context/AuthContext';
 
 import ScreenWrapper from '@/components/ScreenWrapper';
 import Header from '@/components/Header';
 import Input from '@/components/Input';
 
-import { getUserImgSource } from '@/service/image.service';
-import { updateUserData } from '@/service/user.service';
-
 import Icon from '@/assets/icons';
 import { hp, wp } from '@/utils/common';
 import { theme } from '@/constants/theme';
-import { IUserData } from '@/context/auth.interface';
+
 import CustomButton from '@/components/CustomButton';
+import useUpdateUserProfile from '@/hooks/useUpdateUserProfile';
 
 const EditProfile = () => {
-    const { user, setUserData } = useAuth();
+    const {
+        updateUser,
+        loading,
+        imageSource,
+        handleInputChange,
+        handleSubmit,
+        handlePickImage
+    } = useUpdateUserProfile();
     
-    if (!user?.id) {
-        throw new Error("No User Id Found");
-    }
-
-  const [updateUser, setUpdateUser] = useState<Partial<IUserData>>({
-    username: '',
-    phoneNumber: '',
-    image: '',
-    bio: '',
-    address: '',
-  });
-    
-  const [loading, setLoading] = useState<boolean>(false)
-
-  useEffect(() => {
-    if (user) {
-      setUpdateUser({
-        username: user.username || '',
-        phoneNumber: user.phoneNumber || '',
-        image: user.image || '',
-        address: user.address || '',
-        bio: user.bio || '',
-      });
-    }
-  }, [user]);
-
-  const handleInputChange = (field: keyof IUserData, value: string) => {
-    setUpdateUser((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-    
-    const handleSubmit = async () => {
-    const { username, phoneNumber, address, bio } = updateUser;
-
-    // Input Validation
-    if (!username || !phoneNumber || !address || !bio) {
-        Alert.alert("Edit Not Allowed", "Make sure all the fields are filled");
-        return;
-    }
-    
-    // API Call
-    setLoading(true);
-    try {
-        const res = await updateUserData(user?.id, updateUser);
-        if (res.success) {
-            setUserData({ ...user, ...updateUser });
-        Alert.alert("Success", "Profile updated successfully");
-        } else {
-        Alert.alert("Update Failed", res.message || "An error occurred while updating your profile");
-        }
-    } catch (error) {
-        console.error("Error updating user data: ", error);
-        Alert.alert("Update Failed", "An unexpected error occurred");
-    } finally {
-        setLoading(false);
-    }
-    };
-
-
-    const handlePickImage = async () => {
-      
-    };
-
-  const imageSource = getUserImgSource(updateUser.image);
-
   return (
     <ScreenWrapper bg="#F5F5DC">
       <View style={styles.container}>
