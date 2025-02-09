@@ -1,18 +1,28 @@
 import * as FileSystem from "expo-file-system";
 import { decode } from "base64-arraybuffer";
 import { getFilePath } from "@/utils/getFilePath";
+
 import { supabase } from "@/lib/supabase";
+import { EXPO_PUBLIC_SUPABASE_URL } from "react-native-dotenv";
 interface IUploadFile {
     folderName: string;
     fileUri: string;
     isImage: boolean;
 };
 
-export const getUserImgSource = (imgPath: string | undefined) => {
-    if (imgPath) {
-        return { uri: imgPath}
+export const getUserImgSource = (imgPath: string | null | undefined) => {
+  if (imgPath && typeof imgPath == 'string') {
+    return getSupabaseFileUrl(imgPath);
+  }
+  return require('../assets/images/defaultuser.png');
+};
+
+export const getSupabaseFileUrl = (filePath: string | null) => {
+    const bucket = "uploads";
+    if (filePath) {
+        return { uri: `${EXPO_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}/${filePath}`}
     }
-    return require("../assets/images/defaultuser.png");
+    return null;
 };
 
 export const uploadFile = async (props: IUploadFile) => {
@@ -41,7 +51,6 @@ export const uploadFile = async (props: IUploadFile) => {
                 message: error?.message || "Failed to upload the file"
             }
         }
-        console.log('data', data.path);
         return {
             success: true,
             data: data.path

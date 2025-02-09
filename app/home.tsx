@@ -31,7 +31,7 @@ const Home = () => {
           </Pressable>
           <Pressable onPress={() => router.push("/profile")}>
               <Avatar
-                source={user?.image}
+                source={user?.image!}
               />
           </Pressable>
         </View>

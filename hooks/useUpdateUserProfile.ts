@@ -12,7 +12,7 @@ import { getUserImgSource, uploadFile} from "@/service/image.service";
 const initialUserData = {
         username: '',
         phoneNumber: '',
-        image: '',
+        image: null,
         bio: '',
         address: '',
 }
@@ -49,56 +49,67 @@ const useUpdateUserProfile = () => {
       };
         
     const handleSubmit = async () => {
-        const { username, phoneNumber, address, bio, image } = updateUser;
-        // Input Validation
-        if (!username || !phoneNumber || !address || !bio) {
-            Alert.alert("Edit Not Allowed", "Make sure all the fields are filled");
-            return;
+  const { username, phoneNumber, address, bio, image } = updateUser;
+  // Input Validation
+  if (!username || !phoneNumber || !address || !bio) {
+    Alert.alert("Edit Not Allowed", "Make sure all the fields are filled");
+    return;
+  }
+  
+  let updatedImage = image;
+  setLoading(true);
+  // Upload Image
+  if (typeof image === 'object' && image !== null && 'uri' in image) {
+    const imageRes = await uploadFile({
+      folderName: 'profilePic',
+      fileUri: image.uri,
+      isImage: true,
+    });
+    
+    updatedImage = imageRes.success ? imageRes.data : null;
+  }
+  
+    const payload = { username, phoneNumber, address, bio, image: updatedImage };
+    
+    // API Call
+    try {
+        const res = await updateUserData(user?.id, payload);
+        if (res.success) {
+        setUserData({ ...user, ...payload });
+        Alert.alert("Profile Updated", "Your profile was updated successfully");
+        router.back();
+        } else {
+        Alert.alert("Update Failed", res.message || "An error occurred while updating your profile");
         }
-        
-        // Upload Image
-        if (typeof image === 'object') {
+    } catch (error) {
+        console.error("Error updating user data: ", error);
+        Alert.alert("Update Failed", "An unexpected error occurred");
+    } finally {
+        setLoading(false);
+    }
+    };
 
-        }
-        
-        // API Call
-        setLoading(true);
-        try {
-            const res = await updateUserData(user?.id, updateUser);
-            if (res.success) {
-                setUserData({ ...user, ...updateUser });
-                Alert.alert("Profile Updated", "Your profile was updated successfully");
-                router.back();
-            } else {
-                Alert.alert("Update Failed", res.message || "An error occurred while updating your profile");
-            }
-        } catch (error) {
-            console.error("Error updating user data: ", error);
-            Alert.alert("Update Failed", "An unexpected error occurred");
-        } finally {
-            setLoading(false);
-        }
-    };
-    
-    
+
     const handlePickImage = async () => {
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['images'],
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-        
-        
-        if (!result.canceled) {
-            setUpdateUser({...user, image: result.assets[0].uri});
-        }
+    const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ['images'],
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+    });
+
+    if (!result.canceled && result.assets) {
+        setUpdateUser((prev) => ({
+        ...prev,
+        image: result.assets[0],
+        }));
+    }
     };
+
     
-    const imageSource = user?.image && typeof user?.image === 'object' ?
-        user?.image :    
+    const imageSource = user.image && typeof user.image == 'object' ?
+        user.image.uri :
         getUserImgSource(updateUser.image as string);
-    
         return {
             updateUser,
             loading,

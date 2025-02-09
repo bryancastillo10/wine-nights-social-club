@@ -2,7 +2,7 @@ export interface IUserData {
     id: string;
     created_at: string;
     username: string;
-    image?: string; 
+    image?: string | null | {uri: string}; 
     bio?: string;
     email: string;
     address?: string;

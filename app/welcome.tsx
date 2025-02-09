@@ -12,8 +12,8 @@ const Welcome = () => {
   const router = useRouter();
   
   return (
-    <ScreenWrapper bg="#F5F5DC">
-          <StatusBar style="dark" />
+    <ScreenWrapper bg="#F4F3F2">
+          <StatusBar style="dark"/>
           <View style={styles.container}>
             {/* Welcome Image */}
             <Image
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around',
-        backgroundColor: 'white',
         paddingHorizontal: wp(4)
     },
     welcomeImage: {
