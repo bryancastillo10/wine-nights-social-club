@@ -1,4 +1,13 @@
-import { StyleSheet, ScrollView, Text, View } from 'react-native'
+import {
+  StyleSheet,
+  ScrollView,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Pressable
+} from 'react-native'
+
 
 import ScreenWrapper from '@/components/ScreenWrapper';
 import Header from '@/components/Header';
@@ -6,18 +15,30 @@ import Avatar from '@/components/Avatar';
 import RichTextEditor from '@/components/RichTextEditor';
 
 import { useAuth } from '@/context/AuthContext';
+import useCreatePost from '@/hooks/posts/useCreatePost';
 
 import { wp, hp } from '@/utils/common';
 import { theme } from '@/constants/theme';
+import Icon from '@/assets/icons';
+import CustomButton from '@/components/CustomButton';
 
-import { useRef } from 'react';
 
 const NewPost = () => {
   const { user } = useAuth();
   
-  const bodyRef = useRef("");
-  const editorRef = useRef(null);
+  const {
+    file,
+    loading,
+    editorRef,
+    onChangeBodyText,
+    handleMediaPick,
+    handleRemoveMedia,
+    handleSubmit,
+    getFileType,
+    getFileUri
+  } = useCreatePost();
   
+
   return (
     <ScreenWrapper bg="#F5F5DC">
       <View style={styles.container}>
@@ -41,9 +62,66 @@ const NewPost = () => {
             </View>
           </View>
           <View style={styles.textEditor}>
-            <RichTextEditor/>
+            <RichTextEditor
+              editorRef={editorRef}
+              onChangeBodyText={onChangeBodyText}
+            />
+          </View>
+           {file && file.length > 0 && (
+            <View style={styles.file}>
+              {getFileType(file) === "video" ? (
+                <Text>Video</Text>
+              ) : getFileUri(file) ? (
+                <Image
+                  source={{ uri: getFileUri(file) ?? undefined }}
+                  style={{ flex: 1 }}
+                  resizeMode="cover"
+                />
+              ) : (
+                  <Text style={[styles.publicText, { textAlign: 'center' }]}>
+                    Cannot Read the File
+                  </Text>
+              )}
+              <Pressable
+                style={styles.closeIcon}
+                onPress={handleRemoveMedia}
+              >
+                <Icon
+                  name="delete"
+                  size={25}
+                  strokeWidth={2}
+                  color={theme.colors.darkLight}
+                />
+              </Pressable>
+            </View>
+          )}
+          <View style={styles.media}>
+            <Text style={styles.addImageText}>Attach Image or Video</Text>
+            <View style={styles.mediaIcon}>
+              <TouchableOpacity onPress={()=> handleMediaPick("image")}>
+                <Icon
+                  name="image"
+                  size={30}
+                  color={theme.colors.text}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=> handleMediaPick("video")}>
+                <Icon
+                  name="video"
+                  size={33}
+                  color={theme.colors.text}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
+        <CustomButton
+          title="Post"
+          loading={loading}
+          hasShadow={false}
+          buttonStyle={{ height: hp(6.2) }}
+          onPress={handleSubmit}
+        />
       </View>
     </ScreenWrapper>
   )
@@ -103,13 +181,38 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderCurve: 'continuous'
   },
+  media: {
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 1.5,
+    padding: 12,
+    paddingHorizontal: 18,
+    borderRadius: theme.radius.xl,
+    borderCurve: 'continuous',
+    borderColor: theme.colors.gray
+  },
+  mediaIcon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15
+  },
+  addImageText: {
+    fontSize: hp(1.9),
+    fontWeight: theme.fonts.semibold,
+    color: theme.colors.text
+  },
   video: {
   
   },
   closeIcon: {
     position: 'absolute',
     top: 10,
-    right: 10
+    right: 10,
+    backgroundColor: theme.colors.rose,
+    opacity:0.8,
+    padding: 4,
+    borderRadius: theme.radius.md
   }
   
 })
