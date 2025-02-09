@@ -7,7 +7,7 @@ import {
   Image,
   Pressable
 } from 'react-native'
-
+import { Video, ResizeMode } from "expo-av";
 
 import ScreenWrapper from '@/components/ScreenWrapper';
 import Header from '@/components/Header';
@@ -68,9 +68,14 @@ const NewPost = () => {
             />
           </View>
            {file && file.length > 0 && (
-            <View style={styles.file}>
+           <View style={styles.file}>
               {getFileType(file) === "video" ? (
-                <Text>Video</Text>
+                <Video
+                  source={{uri: getFileUri(file) ?? ""}}
+                  style={{ flex: 1 }}
+                  resizeMode={"cover" as ResizeMode}
+                  useNativeControls
+                />
               ) : getFileUri(file) ? (
                 <Image
                   source={{ uri: getFileUri(file) ?? undefined }}
@@ -80,7 +85,7 @@ const NewPost = () => {
               ) : (
                   <Text style={[styles.publicText, { textAlign: 'center' }]}>
                     Cannot Read the File
-                  </Text>
+                  </Text> 
               )}
               <Pressable
                 style={styles.closeIcon}
