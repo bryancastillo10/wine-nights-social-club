@@ -3,7 +3,7 @@ import { Router, useRouter } from 'expo-router'
 
 import { useAuth } from '@/context/AuthContext'
 import { IUserData } from '@/context/auth.interface'
-import useLogout from '@/hooks/useLogout'
+import useLogout from '@/hooks/auth/useLogout'
 
 import ScreenWrapper from '@/components/ScreenWrapper'
 import Header from '@/components/Header'

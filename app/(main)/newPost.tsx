@@ -10,8 +10,13 @@ import { useAuth } from '@/context/AuthContext';
 import { wp, hp } from '@/utils/common';
 import { theme } from '@/constants/theme';
 
+import { useRef } from 'react';
+
 const NewPost = () => {
   const { user } = useAuth();
+  
+  const bodyRef = useRef("");
+  const editorRef = useRef(null);
   
   return (
     <ScreenWrapper bg="#F5F5DC">

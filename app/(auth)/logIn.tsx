@@ -10,7 +10,7 @@ import Icon from '@/assets/icons';
 import { theme } from '@/constants/theme';
 import { wp, hp } from '@/utils/common';
 import CustomButton from '@/components/CustomButton';
-import useLogin from '@/hooks/useLogin';
+import useLogin from '@/hooks/auth/useLogin';
 
 
 const LogIn = () => {
