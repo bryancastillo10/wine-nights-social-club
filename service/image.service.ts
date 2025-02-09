@@ -10,12 +10,20 @@ interface IUploadFile {
     isImage: boolean;
 };
 
-export const getUserImgSource = (imgPath: string | null | undefined) => {
-  if (imgPath && typeof imgPath == 'string') {
-    return getSupabaseFileUrl(imgPath);
+
+export const getUserImgSource = (img: string | { uri: string } | null | undefined) => {
+  if (img) {
+    if (typeof img === 'object' && img.uri) {
+      return { uri: img.uri };
+    }
+    if (typeof img === 'string') {
+      const bucket = "uploads";
+      return { uri: `${EXPO_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}/${img}` };
+    }
   }
   return require('../assets/images/defaultuser.png');
 };
+
 
 export const getSupabaseFileUrl = (filePath: string | null) => {
     const bucket = "uploads";

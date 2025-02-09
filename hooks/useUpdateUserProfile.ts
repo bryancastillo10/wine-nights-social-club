@@ -105,11 +105,8 @@ const useUpdateUserProfile = () => {
         }));
     }
     };
-
+    const imageSource = getUserImgSource(updateUser.image);
     
-    const imageSource = user.image && typeof user.image == 'object' ?
-        user.image.uri :
-        getUserImgSource(updateUser.image as string);
         return {
             updateUser,
             loading,

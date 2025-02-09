@@ -25,7 +25,7 @@ const CustomButton = ({
         return (
             <View style={[styles.button, buttonStyle,
             {
-                backgroundColor: 'white'
+                backgroundColor: '#F5F5DC'
             }
             ]}>
                 <Loading/>
