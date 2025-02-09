@@ -5,7 +5,7 @@ import { hp } from '@/utils/common';
 import { theme } from '@/constants/theme';
 import { getUserImgSource } from '@/service/image.service';
 interface IAvatar {
-    source?: string;
+    source?: string | { uri: string };
     size?: number;
     rounded?: number;
 }
@@ -17,10 +17,13 @@ const Avatar = (props: IAvatar) => {
         rounded = theme.radius.md
     } = props;
     
-    const uri = getUserImgSource(source);
+    const imageSource =
+    typeof source === 'object' && source !== null
+      ? { uri: source.uri }
+      : getUserImgSource(source);
     return (
       <Image
-          source={uri}
+          source={imageSource}
           transition={100}
           style={[styles.avatar,
               {

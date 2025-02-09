@@ -73,7 +73,7 @@ const UserHeader = ({ user, router }: IUserHeader) => {
           {/* Profile Picture */}
           <View style={styles.avatarContainer}>
             <Avatar
-              source={user?.image}
+              source={user?.image!}
               size={hp(12)}
               rounded={theme.radius.xxl*1.6}
             />
