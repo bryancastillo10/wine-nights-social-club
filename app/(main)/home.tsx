@@ -5,7 +5,7 @@ import ScreenWrapper from '@/components/ScreenWrapper'
 import CustomButton from '@/components/CustomButton'
 import Icon from '@/assets/icons'
 
-import useLogout from '@/hooks/useLogout'
+import useLogout from '@/hooks/auth/useLogout'
 import { wp, hp } from '@/utils/common'
 import { theme } from '@/constants/theme'
 import Avatar from '@/components/Avatar'

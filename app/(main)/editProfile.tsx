@@ -17,7 +17,7 @@ import { hp, wp } from '@/utils/common';
 import { theme } from '@/constants/theme';
 
 import CustomButton from '@/components/CustomButton';
-import useUpdateUserProfile from '@/hooks/useUpdateUserProfile';
+import useUpdateUserProfile from '@/hooks/user/useUpdateUserProfile';
 
 const EditProfile = () => {
     const {
