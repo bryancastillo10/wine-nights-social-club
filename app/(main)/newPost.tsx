@@ -61,13 +61,13 @@ const NewPost = () => {
               <Text style={styles.publicText}>Public</Text>
             </View>
           </View>
-          <View style={styles.textEditor}>
+          <ScrollView style={styles.textEditor}>
             <RichTextEditor
               editorRef={editorRef}
               onChangeBodyText={onChangeBodyText}
             />
-          </View>
-           {file && file.length > 0 && (
+          </ScrollView>
+           {file && (
            <View style={styles.file}>
               {getFileType(file) === "video" ? (
                 <Video

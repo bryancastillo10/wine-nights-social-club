@@ -1,21 +1,30 @@
 import { useRef, useState } from "react";
+import { Alert } from "react-native";
+import { useRouter } from "expo-router";
+
 import * as ImagePicker from 'expo-image-picker';
 import { RichEditor } from "react-native-pell-rich-editor";
+
+import { useAuth } from "@/context/AuthContext";
 import { getSupabaseFileUrl } from "@/service/image.service";
+import { createOrUpdatePost } from "@/service/post.service";
 
 export type MediaType = "image" | "video" | null;
 
 const useCreatePost = () => {
+  const { user } = useAuth();
+  const router = useRouter();
+  
   const bodyRef = useRef<string>("");
   const editorRef = useRef<null | RichEditor>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [file, setFile] = useState<ImagePicker.ImagePickerAsset[] | null>(null);
+  const [file, setFile] = useState<ImagePicker.ImagePickerAsset | null>(null);
 
-   const onChangeBodyText = (body: string) => {
+  const onChangeBodyText = (body: string) => {
         bodyRef.current = body;
    };
     
-    const handleMediaPick = async (mediaType: MediaType) => {
+  const handleMediaPick = async (mediaType: MediaType) => {
     const mediaConfig: ImagePicker.ImagePickerOptions = {
       mediaTypes:
         mediaType === "video"
@@ -28,42 +37,66 @@ const useCreatePost = () => {
     const result = await ImagePicker.launchImageLibraryAsync(mediaConfig);
 
     if (!result.canceled) {
-      setFile(result.assets); 
+      setFile(result.assets[0]); 
     }
-    };
+  };
     
-    const isLocalFile = (files: ImagePicker.ImagePickerAsset[] | null): boolean => {
-        return (
-            files !== null &&
-            files.length > 0 &&
-            files[0].uri.startsWith("file://")
-        );
-    };
+  const isLocalFile = (file: ImagePicker.ImagePickerAsset | null):boolean | null => {
+    if (!file) return null;
+    if (typeof file == 'object') return true;
+    return false;
+  };
 
+  const getFileType = (file: ImagePicker.ImagePickerAsset | null) => {
+      if (!file) return null;
+      if (isLocalFile(file)) {
+        return file.type
+      }
+       
+  };
 
-    const getFileType = (file: ImagePicker.ImagePickerAsset[] | null): MediaType => {
-        if (!file || file.length === 0) return null;
-        return file[0].type as MediaType;
-        };
+  const getFileUri = (files: ImagePicker.ImagePickerAsset | null): string | null => {
+    if (!files) return null;   
+    if (files.uri.startsWith("file://")) {
+        return files.uri;
+    }
+          
+    const remoteFile = getSupabaseFileUrl(file as never);
+      return remoteFile?.uri ?? null;
+  };
 
-        const getFileUri = (files: ImagePicker.ImagePickerAsset[] | null): string | null => {
-        if (!files || files.length === 0) return null;
-
-        const asset = files[0];
-        if (asset.uri.startsWith("file://")) {
-        return asset.uri;
-        }
-        const remoteFile = getSupabaseFileUrl(asset as never);
-            return remoteFile?.uri ?? null;
-        };
-
-        const handleRemoveMedia = () => {
+  const handleRemoveMedia = () => {
             setFile(null);
-        };
+  };
+  
+  const clearPayload = () => {
+    setFile(null);
+    bodyRef.current = '';
+    editorRef.current?.setContentHTML('');
+  };
     
-        const handleSubmit = async () => {
-        
-        };
+  const handleSubmit = async () => {
+      if (!bodyRef.current && !file) {
+        Alert.alert("Post Warning", "Please add a media or text input to post");
+        return;
+      }
+          
+      setLoading(true);
+      const payload = {
+        file,
+        body: bodyRef.current,
+        userId: user?.id ?? ""
+      }
+          
+      // Create Post API 
+      const res = await createOrUpdatePost(payload);
+      setLoading(false);
+    if (res.success) {
+      clearPayload();
+      router.back();
+    }
+    else { Alert.alert("Error Posting", res.data) };
+    };
 
     return {
         loading,
