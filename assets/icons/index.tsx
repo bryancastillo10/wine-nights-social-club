@@ -1,4 +1,4 @@
-import { theme } from '@/constants/theme'
+import { theme } from '@/styles/theme'
 
 import Home from './Home'
 import ArrowRight from './ArrowRight'
