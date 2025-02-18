@@ -1,10 +1,9 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 
-import { hp } from '@/utils/common';
-import { theme } from '@/constants/theme';
-import Loading from './Loading';
+import { hp } from '@/utils/dimensions';
+import { theme } from '@/styles/theme';
 
-interface ICustomButton {
+interface ButtonProps {
     buttonStyle?: { [x: string]: number | string };
     textStyle?: { [x: string]: number | string}
     title: string;
@@ -13,14 +12,14 @@ interface ICustomButton {
     hasShadow?: boolean;
 }
 
-const CustomButton = ({
+const Button = ({
     buttonStyle,
     textStyle,
     title = "",
     onPress = () => { },
     loading = false,
     hasShadow = true
-}: ICustomButton) => { 
+}: ButtonProps) => { 
     if (loading) {
         return (
             <View style={[styles.button, buttonStyle,
@@ -28,7 +27,7 @@ const CustomButton = ({
                 backgroundColor: '#F5F5DC'
             }
             ]}>
-                <Loading/>
+                <Text>Loading...</Text>
             </View>)
     }
     return (
@@ -49,7 +48,7 @@ const CustomButton = ({
   )
 }
 
-export default CustomButton
+export default Button;
 
 const styles = StyleSheet.create({
     button: {

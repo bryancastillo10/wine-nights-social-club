@@ -1,53 +1,21 @@
 import { useEffect } from "react";
-import { Stack, SplashScreen, useRouter, Href } from "expo-router"
-import { useFonts } from 'expo-font';
-
-import { supabase } from "@/lib/supabase";
-import { AuthContextProvider, useAuth } from "@/context/AuthContext";
-
-import { findAuthUser } from "@/utils/findAuthUser";
-import { updateUserData } from "@/utils/updateUserData";
-
-SplashScreen.preventAutoHideAsync(); 
+import { useFonts } from "expo-font";
+import { Stack, SplashScreen } from "expo-router";
 
 const _layout = () => {
   return (
-    <AuthContextProvider>
       <RootLayout/>
-    </AuthContextProvider>
   )
 };
 
 const RootLayout = () => {
-  const { setAuth, setUserData } = useAuth();
-  const router = useRouter();
+  // const { setAuth, setUserData } = useAuth();
   const [fontsLoaded] = useFonts({
     Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
     Oswald: require("../assets/fonts/Oswald-Regular.ttf")
   });
     
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        if (session) {
-          // Home Page
-          const mappedUser = findAuthUser(session?.user);
-          setAuth(mappedUser);
-          updateUserData(mappedUser, setUserData);
-          router.replace("/home" as Href);
-        } else {
-          // Welcome Screen
-          setAuth(null);
-          router.replace("/welcome");
-        }
-      }
-    );
-
-    return () => {
-      authListener?.subscription.unsubscribe();
-    };
-  }, []);
-  
+ 
   useEffect(() => {
     async function hideSplashScreen() {
       if (fontsLoaded) {
