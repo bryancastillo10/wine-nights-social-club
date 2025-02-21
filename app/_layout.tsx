@@ -5,7 +5,7 @@ import { useFonts } from "expo-font";
 
 SplashScreen.preventAutoHideAsync(); 
 
-const RootLayout = () => {
+const _layout = () => {
    const [fontsLoaded] = useFonts({
     Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
     Oswald: require("../assets/fonts/Oswald-Regular.ttf")
@@ -35,5 +35,5 @@ const RootLayout = () => {
   )
 }
 
-export default RootLayout
+export default _layout
 

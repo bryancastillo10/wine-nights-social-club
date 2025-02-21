@@ -7,7 +7,7 @@ export const welcomeStyles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around',
-        paddingHorizontal: wp(4)
+        paddingHorizontal: wp(8)
     },
     welcomeImage: {
         height: hp(30),
