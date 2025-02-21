@@ -1,9 +1,13 @@
-import { SplashScreen, Stack, Slot } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
 
 
-SplashScreen.preventAutoHideAsync(); 
+const _layout = () => {
+  return (
+      <RootLayout/>
+  )
+};
 
 const RootLayout = () => {
    const [fontsLoaded] = useFonts({
@@ -14,7 +18,7 @@ const RootLayout = () => {
   useEffect(() => {
     async function hideSplashScreen() {
       if (fontsLoaded) {
-        SplashScreen.hideAsync();
+        SplashScreen.hideAsync(); 
       }
     }
     hideSplashScreen();
@@ -25,15 +29,17 @@ const RootLayout = () => {
   };
   
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false
-      }}
-    >
-      <Slot/>
-    </Stack>
+ <Stack
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
+    <Stack.Screen 
+      name="welcome"
+    />
+  </Stack>
   )
 }
 
-export default RootLayout
+export default _layout;
 

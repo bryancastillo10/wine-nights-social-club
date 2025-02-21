@@ -34,6 +34,7 @@ export const welcomeStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        paddingBottom: hp(6),
         gap: 5,
     },
     loginText: {

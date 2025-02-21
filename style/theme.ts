@@ -2,10 +2,10 @@ type FontWeight = "500" | "600" | "700" | "800";
 
 export const theme = {
     colors: {
-  // primary: vibrant green
-  primary: "#00C26F",
-  // primaryDark: darker green
-  primaryDark: "#00AC62",
+  // primary: light brown
+  primary: "#9b7874",
+  // primaryDark: red
+  primaryDark: "#471323",
   // dark: dark gray
   dark: "#3E3E3E",
   // darkLight: light gray
