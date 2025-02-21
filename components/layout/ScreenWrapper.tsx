@@ -13,7 +13,7 @@ const ScreenWrapper = ({children, bg = "#F4F3F2"}: ScreenWrapperProps) => {
     return (
     <View
         style={{
-            flex: 1,
+            flex:1,
             paddingTop,
             backgroundColor: bg
         }}

@@ -33,7 +33,12 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      ["expo-font", {
+          "fonts": ["./assets/fonts/Poppins-Regular.ttf",
+            "./assets/fonts/Oswald-Regular.ttf"
+        ]
+      }]
     ],
     "experiments": {
       "typedRoutes": true

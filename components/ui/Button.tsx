@@ -2,7 +2,7 @@ import { StyleSheet, Text, Pressable, View } from 'react-native'
 
 import Loading from '@/components/common/Loading';
 
-import { hp } from '@/utils/dimensions'
+import { wp, hp } from '@/utils/dimensions'
 import { theme } from '@/style/theme';
 
 interface ButtonProps {
@@ -46,7 +46,10 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colors.primary,
         height: hp(6.6),
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginHorizontal: wp(4),
+        borderCurve: 'continuous',
+        borderRadius: theme.radius.xl
     },
      shadowStyle: {
       shadowColor: theme.colors.dark,

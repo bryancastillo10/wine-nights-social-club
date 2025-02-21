@@ -7,7 +7,7 @@ export const welcomeStyles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around',
-        paddingHorizontal: wp(8)
+        paddingHorizontal: wp(4)
     },
     welcomeImage: {
         height: hp(30),
@@ -34,6 +34,7 @@ export const welcomeStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        paddingBottom: hp(6),
         gap: 5,
     },
     loginText: {
