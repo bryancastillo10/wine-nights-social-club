@@ -22,7 +22,7 @@ const Welcome = () => {
         
         <View style={{ gap: 20 }}>
                 <Text style={welcomeStyles.title}>Wine Nights Social Club</Text>
-                  <Text style={welcomeStyles.caption}>
+                  <Text style={[welcomeStyles.caption]}>
                       Sip, Share, Stay Connected - where every glass poured brings friends closer,
                       every story told lingers like fine wine, and every moment is worth savoring
                   </Text>

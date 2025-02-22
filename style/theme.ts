@@ -8,8 +8,8 @@ export const theme = {
   primaryDark: "#471323",
   // dark: dark gray
   dark: "#3E3E3E",
-  // darkLight: light gray
-  darkLight: "#E1E1E1",
+  // snow: light gray
+  snow: "#E1E1E1",
   // gray: neutral gray
   gray: "#E3E3E3",
   

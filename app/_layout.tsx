@@ -1,7 +1,11 @@
-import { SplashScreen, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
+import { Text } from "react-native";
 
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync(); 
 
 const _layout = () => {
   return (
@@ -10,21 +14,18 @@ const _layout = () => {
 };
 
 const RootLayout = () => {
-   const [fontsLoaded] = useFonts({
+   const [loaded, error] = useFonts({
     Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
     Oswald: require("../assets/fonts/Oswald-Regular.ttf")
    });
   
   useEffect(() => {
-    async function hideSplashScreen() {
-      if (fontsLoaded) {
-        SplashScreen.hideAsync(); 
-      }
+    if (loaded || error) {
+      SplashScreen.hideAsync();
     }
-    hideSplashScreen();
-  }, [fontsLoaded]);
+  }, [loaded, error]);
 
-  if (!fontsLoaded) {
+  if (!loaded && !error) {
     return null;
   };
   
@@ -33,9 +34,9 @@ const RootLayout = () => {
     screenOptions={{
       headerShown: false,
     }}
-  >
+    >
     <Stack.Screen 
-      name="welcome"
+      name="index"
     />
   </Stack>
   )

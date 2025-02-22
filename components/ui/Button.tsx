@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
     text: {
         fontSize: hp(2.5),
         color: "#f4f3f2",
-        fontWeight: theme.fonts.bold
+        fontWeight: theme.fonts.bold,
+        fontFamily: "Poppins",
+        letterSpacing:2
     },
     })
