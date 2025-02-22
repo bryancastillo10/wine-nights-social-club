@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Pressable, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 import Loading from '@/components/common/Loading';
 
@@ -28,14 +28,14 @@ const Button = (props: ButtonProps) => {
             </View>)
     }
     return (
-    <Pressable
+    <TouchableOpacity
         onPress={onPress}
         style={[styles.button, buttonStyle, hasShadow && styles.shadowStyle]}
     >
         <Text style={[styles.text, textStyle]}>
             {text}
         </Text>
-    </Pressable>
+    </TouchableOpacity>
   )
 }
 
@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
     text: {
         fontSize: hp(2.5),
         color: "#f4f3f2",
-        fontWeight: theme.fonts.bold
+        fontWeight: theme.fonts.bold,
+        fontFamily: "Poppins",
+        letterSpacing:2
     },
     })

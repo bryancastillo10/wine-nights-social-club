@@ -6,7 +6,7 @@ export const welcomeStyles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         paddingHorizontal: wp(4)
     },
     welcomeImage: {
@@ -16,13 +16,15 @@ export const welcomeStyles = StyleSheet.create({
     title: {
         textAlign: 'center',
         color: theme.colors.text,
-        fontWeight: theme.fonts.extraBold,
-        fontSize: hp(3.5),
-        fontFamily: "Oswald"
+        fontWeight: theme.fonts.medium,
+        fontSize: hp(4),
+        letterSpacing:1.5,
+        fontFamily: theme.fontFamily.secondary
     },
     caption: {
         textAlign: 'center',
-        paddingHorizontal: wp(10),
+        paddingHorizontal: wp(6),
+        fontFamily: theme.fontFamily.primary,
         fontSize: hp(1.7),
         color: theme.colors.text,
     },
@@ -34,6 +36,7 @@ export const welcomeStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        fontFamily: theme.fontFamily.primary,
         paddingBottom: hp(6),
         gap: 5,
     },
