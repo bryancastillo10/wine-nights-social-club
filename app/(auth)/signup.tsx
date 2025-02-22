@@ -16,6 +16,10 @@ import SignUpImage from '@/assets/images/SignUpImage';
 const Signup = () => {
   const router = useRouter();
   
+  const handleSubmit = () => {
+    router.push("/home" as Href);
+  };
+  
   return (
     <ScreenWrapper>
       <BackButton />
@@ -62,7 +66,7 @@ const Signup = () => {
         />
                   
         <Button
-            onPress={() => { }}
+            onPress={handleSubmit}
             text="Sign Up"
           />
         </View> 
