@@ -1,12 +1,21 @@
-import { Text, View } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
+import { useRouter, Href } from 'expo-router';
 
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
+import Divider from '@/components/common/Divider';
 import BackButton from '@/components/ui/BackButton';
+import Input from '@/components/ui/Input';
+import Button from '@/components/ui/Button';
 
 import { authStyle } from '@/style/auth/authScreen.style';
 import LoginImage from '@/assets/images/LoginImage';
+import Icon from '@/assets/icons';
+import { theme } from '@/style/theme';
+
 
 const Login = () => {
+  const router = useRouter();
+  
   return (
     <ScreenWrapper>
       <BackButton />
@@ -23,8 +32,44 @@ const Login = () => {
         {/* Form */}
         <View style={authStyle.form}>
           <Text style={authStyle.formText}>
-            Fill Up the Form or access via Biometrics</Text>
+            Fill Up the Login Form
+          </Text>
+          
+          <Input
+            icon={<Icon name="mail" size={26} strokeWidth={1.6} />}
+            placeholder="Registered email"
+            value=""
+            onChangeText={()=>{}}
+          />
+          
+          <Input
+            icon={<Icon name="lock" size={26} strokeWidth={1.6} />}
+            placeholder="Password"
+            value=""
+            onChangeText={()=>{}}
+          />
+          
+          <Button
+            onPress={() => { }}
+            text="Log In"
+          />
+           {/* Biometriics */}
+        <Divider/>
+          
         </View>
+         
+        {/* Footer */}
+        <View style={authStyle.footer}>
+            <Text style={authStyle.footerText}>
+              Don't have an account?
+            </Text>
+            <Pressable onPress={() => router.push("/signup" as Href)}>
+              <Text 
+                style={[authStyle.footerText, {color: theme.colors.primary}]}>
+                Sign Up Here
+              </Text>
+            </Pressable>
+          </View>
       </View>
     </ScreenWrapper>
   )

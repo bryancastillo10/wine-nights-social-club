@@ -23,6 +23,7 @@ import User from './User'
 import Share from './Share'
 import Bell from './Bell'
 import Drink from './Drink'
+import Fingerprint from './Fingerprint'
 
 const icons = {
   home: Home,
@@ -47,7 +48,8 @@ const icons = {
   share: Share,
   user: User,
   video: Video,
-  bell: Bell
+  bell: Bell,
+  fingerprint: Fingerprint
 }
 
 interface IIcon {

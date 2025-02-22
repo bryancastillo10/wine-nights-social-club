@@ -6,7 +6,7 @@ import { hp, wp } from "@/utils/dimensions";
 export const authStyle = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 40,
+        gap: 20,
         paddingHorizontal: wp(5)
     },
     welcomeTitle: {
@@ -18,7 +18,7 @@ export const authStyle = StyleSheet.create({
         color: theme.colors.text
     },
     form: {
-    gap: 25
+        gap: 20
     },
     formText: {
         fontSize: hp(1.75),
@@ -39,6 +39,8 @@ export const authStyle = StyleSheet.create({
     footerText: {
         textAlign: 'center',
         color: theme.colors.text,
+        fontWeight: theme.fonts.semibold,
+        fontFamily: theme.fontFamily.primary,
         fontSize: hp(1.6)
     }
 })
