@@ -14,6 +14,7 @@ import Location from './Location'
 import Lock from './Lock'
 import Logout from './Logout'
 import Mail from './Mail'
+import Plus from './Plus'
 import Search from './Search'
 import Send from './Send'
 import ThreeDotHorizontal from './ThreeDotHorizontal'
@@ -25,7 +26,7 @@ import Bell from './Bell'
 import Drink from './Drink'
 import Fingerprint from './Fingerprint'
 
-const icons = {
+export const icons = {
   home: Home,
   arrowLeft: ArrowLeft,
   arrowRight: ArrowRight,
@@ -43,6 +44,7 @@ const icons = {
   threeDotHorizontal: ThreeDotHorizontal,
   threeDotVertical: ThreeDotVertical,
   mail: Mail,
+  plus: Plus,
   search: Search,
   send: Send,
   share: Share,
