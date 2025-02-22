@@ -1,12 +1,15 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Image } from 'react-native'
+import { useRouter, Href } from 'expo-router';
+
+import Avatar from '@/components/ui/Avatar'
+import { navmenu } from '@/features/post/constants/navmenu';
 
 import { theme } from '@/style/theme'
 import { hp } from '@/utils/dimensions'
 import Icon from '@/assets/icons'
 
-
 const FeedHeader = () => {
-
+  const router = useRouter();
   return (
     <View style={styles.container}>
         <View style={styles.headerTitle}>
@@ -27,7 +30,17 @@ const FeedHeader = () => {
             </View>
         </View>
         <View style={styles.navContainer}>
-            <Text>Icons Here</Text>    
+            <Avatar/>
+              {navmenu.map((nav) => (
+                <Pressable key={nav.id} onPress={() => router.push(nav.link as Href)}>
+                    <Icon
+                        name={nav.icon}
+                        size={hp(3.2)}
+                        strokeWidth={1.5}
+                        color={theme.colors.text}
+                    />
+          </Pressable>
+        ))}
         </View>
     </View>
   )
@@ -38,7 +51,9 @@ export default FeedHeader
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 8,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        borderBottomWidth: 0.5,
+        borderBottomColor: theme.colors.gray
     },
     headerTitle: {
         flexDirection: 'row',
@@ -61,6 +76,10 @@ const styles = StyleSheet.create({
         height: 32,
     },
     navContainer: {
-        margin: 8
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
+        margin: 8,
+        marginTop: 14
     }
 })

@@ -1,4 +1,13 @@
-export const navmenu = [
+import { Href } from "expo-router";
+import { icons } from "@/assets/icons";
+
+interface INavMenu {
+    id: number;
+    icon: keyof typeof icons;
+    link: string;
+}
+
+export const navmenu: INavMenu[] = [
     {
         id: 1,
         icon: "home",

@@ -26,7 +26,7 @@ import Bell from './Bell'
 import Drink from './Drink'
 import Fingerprint from './Fingerprint'
 
-const icons = {
+export const icons = {
   home: Home,
   arrowLeft: ArrowLeft,
   arrowRight: ArrowRight,
