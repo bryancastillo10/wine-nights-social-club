@@ -19,12 +19,12 @@ export const welcomeStyles = StyleSheet.create({
         fontWeight: theme.fonts.medium,
         fontSize: hp(4),
         letterSpacing:1.5,
-        fontFamily:"Oswald"
+        fontFamily: theme.fontFamily.secondary
     },
     caption: {
         textAlign: 'center',
         paddingHorizontal: wp(6),
-        fontFamily:"Poppins",
+        fontFamily: theme.fontFamily.primary,
         fontSize: hp(1.7),
         color: theme.colors.text,
     },
@@ -36,7 +36,7 @@ export const welcomeStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily:"Poppins",
+        fontFamily: theme.fontFamily.primary,
         paddingBottom: hp(6),
         gap: 5,
     },
