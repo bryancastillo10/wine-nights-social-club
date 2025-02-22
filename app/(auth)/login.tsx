@@ -1,4 +1,4 @@
-import { Text, View, Pressable } from 'react-native';
+import { Text, View, Pressable, TouchableOpacity } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
@@ -54,8 +54,12 @@ const Login = () => {
             text="Log In"
           />
            {/* Biometriics */}
-        <Divider/>
-          
+          <Divider/>
+          <View style={authStyle.biometrics}>
+            <TouchableOpacity>
+              <Icon name="fingerprint" strokeWidth={2} size={36} />
+            </TouchableOpacity>
+          </View>
         </View>
          
         {/* Footer */}

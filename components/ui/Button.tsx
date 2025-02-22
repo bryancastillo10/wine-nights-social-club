@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Pressable, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 import Loading from '@/components/common/Loading';
 
@@ -28,14 +28,14 @@ const Button = (props: ButtonProps) => {
             </View>)
     }
     return (
-    <Pressable
+    <TouchableOpacity
         onPress={onPress}
         style={[styles.button, buttonStyle, hasShadow && styles.shadowStyle]}
     >
         <Text style={[styles.text, textStyle]}>
             {text}
         </Text>
-    </Pressable>
+    </TouchableOpacity>
   )
 }
 

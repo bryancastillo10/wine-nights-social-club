@@ -25,6 +25,10 @@ export const authStyle = StyleSheet.create({
         fontFamily: theme.fontFamily.primary,
         color: theme.colors.text
     },
+    biometrics:{
+        alignItems: 'center',
+        marginBottom:5,
+    },
     forgotPassword: {
         textAlign: 'right',
         color: theme.colors.text,
