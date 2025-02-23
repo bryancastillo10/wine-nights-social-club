@@ -1,11 +1,10 @@
-import { Text, View, Pressable, TouchableOpacity } from 'react-native';
+import { View, Pressable, TouchableOpacity } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import Divider from '@/components/common/Divider';
-import BackButton from '@/components/ui/BackButton';
-import Input from '@/components/ui/Input';
-import Button from '@/components/ui/Button';
+import { BackButton, Button, Input } from '@/components/ui';
+import { TextHeader, Paragraph } from '@/components/typography';
 
 import { authStyle } from '@/style/auth/authScreen.style';
 import LoginImage from '@/assets/images/LoginImage';
@@ -22,18 +21,26 @@ const Login = () => {
       <View style={authStyle.container}>
         {/* Welcome Text */}
         <View>
-          <Text style={authStyle.welcomeTitle}> Welcome Back </Text>
+          <TextHeader
+            variant="h1"
+            style={{ textAlign: "center", letterSpacing: 1.5 }}>
+              Welcome Back
+          </TextHeader>
           <View style={{paddingVertical:10}}>
             <LoginImage/>
           </View>
-          <Text style={authStyle.welcomeTitle}> Stay Connected! </Text>
+                    <TextHeader
+            variant="h1"
+            style={{ textAlign: "center", letterSpacing: 1.5 }}>
+              Stay Connected!
+          </TextHeader>
         </View>
         
         {/* Form */}
         <View style={authStyle.form}>
-          <Text style={authStyle.formText}>
+          <Paragraph>
             Fill Up the Login Form
-          </Text>
+          </Paragraph>
           
           <Input
             icon={<Icon name="mail" size={26} strokeWidth={1.6} />}
@@ -64,14 +71,14 @@ const Login = () => {
          
         {/* Footer */}
         <View style={authStyle.footer}>
-            <Text style={authStyle.footerText}>
+            <Paragraph>
               Don't have an account?
-            </Text>
+            </Paragraph>
             <Pressable onPress={() => router.push("/signup" as Href)}>
-              <Text 
-                style={[authStyle.footerText, {color: theme.colors.primary}]}>
+              <Paragraph 
+                style={{color: theme.colors.primary}}>
                 Sign Up Here
-              </Text>
+              </Paragraph>
             </Pressable>
           </View>
       </View>

@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
     avatar: {
         borderCurve: 'continuous',
         borderColor: theme.colors.gray,
-        borderWidth:1,
+        borderWidth:0.5,
     }
 })

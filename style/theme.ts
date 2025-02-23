@@ -1,3 +1,5 @@
+import { hp } from "@/utils/dimensions";
+
 type FontWeight = "500" | "600" | "700" | "800";
 
 export const theme = {
@@ -11,7 +13,7 @@ export const theme = {
   // snow: light gray
   snow: "#E1E1E1",
   // gray: neutral gray
-  gray: "#E3E3E3",
+  gray: "#545454",
   
   // text: standard gray for text
   text: "#494949",
@@ -25,7 +27,7 @@ export const theme = {
   // roseLight: lighter red
   roseLight: "#F87171"
 },
-    fonts: {
+    fontWeight: {
         medium: "500" as FontWeight,
         semibold: "600" as FontWeight,
         bold: "700" as FontWeight,
@@ -34,6 +36,17 @@ export const theme = {
     fontFamily: {
         primary: "Poppins",
         secondary:"Oswald"
+    },
+    fontSize: {
+        h1: hp(5),
+        h2: hp(4),
+        h3: hp(3.5),
+        h4: hp(2.5),
+        lg: hp(2),
+        base: hp(1.7),
+        sm: hp(1.2),
+        xs: 12,
+        xxs: 10
     },
     radius: {
         xs: 10,

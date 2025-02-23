@@ -59,10 +59,10 @@ const styles = StyleSheet.create({
       elevation:4,
     },
     text: {
-        fontSize: hp(2.5),
-        color: "#f4f3f2",
-        fontWeight: theme.fonts.bold,
-        fontFamily: "Poppins",
+        fontSize: theme.fontSize.h4,
+        color: theme.colors.snow,
+        fontWeight: theme.fontWeight.bold,
+        fontFamily: theme.fontFamily.primary,
         letterSpacing:2
     },
     })

@@ -1,7 +1,8 @@
-import { Pressable, StyleSheet, Text, View, Image } from 'react-native'
+import { Pressable, StyleSheet, View, Image } from 'react-native'
 import { useRouter, Href } from 'expo-router';
 
 import Avatar from '@/components/ui/Avatar'
+import { TextHeader } from '@/components/typography';
 import { navmenu } from '@/features/post/constants/navmenu';
 
 import { theme } from '@/style/theme'
@@ -19,7 +20,7 @@ const FeedHeader = () => {
                     resizeMode='contain'
                     source={require("../../../assets/images/icon.png")}
                 />
-                <Text style={styles.headerText}>Wine Nights Social Club</Text>
+                <TextHeader>Wine Nights Social Club</TextHeader>
             </View>  
             <View style={{marginRight: 8}}>
                 <Icon
@@ -30,17 +31,29 @@ const FeedHeader = () => {
             </View>
         </View>
         <View style={styles.navContainer}>
-            <Avatar/>
-              {navmenu.map((nav) => (
-                <Pressable key={nav.id} onPress={() => router.push(nav.link as Href)}>
+            <View style={styles.navLeftContainer}>
+                <Avatar/>
+                {navmenu.map((nav) => (
+                    <Pressable key={nav.id} onPress={() => router.push(nav.link as Href)}>
+                        <Icon
+                            name={nav.icon}
+                            size={hp(3.2)}
+                            strokeWidth={1.5}
+                            color={theme.colors.text}
+                        />
+                    </Pressable>
+                    ))}
+            </View>
+            <View style={styles.logoutBtn}>
+                <Pressable onPress={()=>{}}>
                     <Icon
-                        name={nav.icon}
-                        size={hp(3.2)}
-                        strokeWidth={1.5}
-                        color={theme.colors.text}
+                        name="logout"
+                        size={hp(2.5)}
+                        strokeWidth={2}
+                        color={theme.colors.dark}
                     />
-          </Pressable>
-        ))}
+                </Pressable>
+            </View>
         </View>
     </View>
   )
@@ -50,6 +63,7 @@ export default FeedHeader
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor:"#F5F5DC50",
         paddingVertical: 8,
         paddingHorizontal: 10,
         borderBottomWidth: 0.5,
@@ -68,7 +82,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: hp(2.5),
-        fontWeight: theme.fonts.medium,
+        fontWeight: theme.fontWeight.medium,
         fontFamily: theme.fontFamily.secondary
     },
     icon: {
@@ -77,9 +91,21 @@ const styles = StyleSheet.create({
     },
     navContainer: {
         flexDirection: 'row',
+        justifyContent:'space-between',
         alignItems: 'center',
         gap: 12,
         margin: 8,
-        marginTop: 14
+        marginTop: hp(2)
+    },
+    navLeftContainer: {
+        flexDirection: 'row',
+        alignItems:'center',
+        gap: 12
+    },
+    logoutBtn: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 4
     }
 })
