@@ -26,6 +26,7 @@ import Bell from './Bell'
 import Drink from './Drink'
 import Fingerprint from './Fingerprint'
 import AllUsers from './AllUsers'
+import Music from './Music'
 
 export const icons = {
   home: Home,
@@ -53,7 +54,8 @@ export const icons = {
   video: Video,
   bell: Bell,
   fingerprint: Fingerprint,
-  allusers: AllUsers 
+  allusers: AllUsers,
+  music: Music  
 }
 
 interface IIcon {

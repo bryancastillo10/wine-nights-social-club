@@ -18,7 +18,7 @@ const FeedHeader = () => {
                 <Image
                     style={styles.icon}
                     resizeMode='contain'
-                    source={require("../../../assets/images/icon.png")}
+                    source={require("../../assets/images/icon.png")}
                 />
                 <TextHeader>Wine Nights Social Club</TextHeader>
             </View>  
@@ -32,7 +32,9 @@ const FeedHeader = () => {
         </View>
         <View style={styles.navContainer}>
             <View style={styles.navLeftContainer}>
-                <Avatar/>
+                <Pressable onPress={() => router.push("/(feed)/profile" as Href)}>
+                      <Avatar />
+                </Pressable>
                 {navmenu.map((nav) => (
                     <Pressable key={nav.id} onPress={() => router.push(nav.link as Href)}>
                         <Icon

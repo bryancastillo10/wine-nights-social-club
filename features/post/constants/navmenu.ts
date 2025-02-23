@@ -11,7 +11,7 @@ export const navmenu: INavMenu[] = [
     {
         id: 1,
         icon: "home",
-        link: "/feed"
+        link: "/home"
     },
     {
         id: 2,

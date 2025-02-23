@@ -25,6 +25,7 @@
     "plugins": [
       "expo-router",
       "expo-font",
+      "expo-video",
       [
         "expo-splash-screen",
         {
@@ -34,11 +35,16 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      ["expo-font", {
-          "fonts": ["./assets/fonts/Poppins-Regular.ttf",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Poppins-Regular.ttf",
             "./assets/fonts/Oswald-Regular.ttf"
-        ]
-      }]
+          ]
+        }
+      ],
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true
