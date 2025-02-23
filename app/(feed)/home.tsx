@@ -1,8 +1,7 @@
-import { StyleSheet} from 'react-native'
 import MainPageContainer from '@/components/layout/MainPageContainer'
 import PostCard from '@/features/post/components/PostCard'
 
-const home = () => {
+const Home = () => {
   return (
     <MainPageContainer withHeader>
       <PostCard />
@@ -10,6 +9,4 @@ const home = () => {
   )
 }
 
-export default home
-
-const styles = StyleSheet.create({})
+export default Home;
