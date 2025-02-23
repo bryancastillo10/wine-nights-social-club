@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         height: hp(5.5),
-        fontSize: 16,
+        fontSize: theme.fontSize.lg,
         fontFamily: theme.fontFamily.primary
     }
 })

@@ -1,17 +1,17 @@
-import { Text, View, Pressable, TouchableOpacity } from 'react-native';
+import { View, Pressable } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import BackButton from '@/components/ui/BackButton';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
+import { Paragraph, TextHeader } from '@/components/typography';
 
 import { authStyle } from '@/style/auth/authScreen.style';
 
 import Icon from '@/assets/icons';
 import { theme } from '@/style/theme';
 import SignUpImage from '@/assets/images/SignUpImage';
-
 
 const Signup = () => {
   const router = useRouter();
@@ -26,7 +26,11 @@ const Signup = () => {
       <View style={authStyle.container}>
         {/* Welcome Text */}
         <View>
-          <Text style={authStyle.welcomeTitle}> Cheers! </Text>
+           <TextHeader
+            variant="h1"
+            style={{ textAlign: "center", letterSpacing: 1.5 }}>
+              Cheers!
+          </TextHeader>
           <View style={{paddingVertical:10}}>
             <SignUpImage/>
           </View>
@@ -34,10 +38,7 @@ const Signup = () => {
         
         {/* Form */}
         <View style={authStyle.form}>
-          <Text style={authStyle.formText}>
-            Fill Up the Signup Form
-            </Text>
-                  
+          <Paragraph> Fill Up the Signup Form </Paragraph>                  
           <Input
             icon={<Icon name="user" size={26} strokeWidth={1.6} />}
             placeholder="Enter your username"
@@ -72,14 +73,14 @@ const Signup = () => {
         </View> 
         {/* Footer */}
         <View style={authStyle.footer}>
-            <Text style={authStyle.footerText}>
+            <Paragraph>
               Already have an account?
-            </Text>
+            </Paragraph>
             <Pressable onPress={() => router.push("/login" as Href)}>
-              <Text 
-                style={[authStyle.footerText, {color: theme.colors.primary}]}>
+              <Paragraph 
+                style={{color: theme.colors.primary}}>
                 Log In
-              </Text>
+              </Paragraph>
             </Pressable>
           </View>
       </View>
