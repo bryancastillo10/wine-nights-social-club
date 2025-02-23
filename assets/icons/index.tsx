@@ -25,6 +25,7 @@ import Share from './Share'
 import Bell from './Bell'
 import Drink from './Drink'
 import Fingerprint from './Fingerprint'
+import AllUsers from './AllUsers'
 
 export const icons = {
   home: Home,
@@ -51,7 +52,8 @@ export const icons = {
   user: User,
   video: Video,
   bell: Bell,
-  fingerprint: Fingerprint
+  fingerprint: Fingerprint,
+  allusers: AllUsers 
 }
 
 interface IIcon {
@@ -68,8 +70,8 @@ const Icon = ({ name, ...props }: IIcon) => {
       <IconComponent
         height={props.size || 24}
         width={props.size || 24}
-        strokeWidth={props.strokeWidth || 1.9}
-        color={theme.colors.textLight}
+        strokeWidth={props.strokeWidth || 2}
+        color={theme.colors.text}
         {...props}
       />
   )

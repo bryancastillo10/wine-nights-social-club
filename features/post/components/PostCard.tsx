@@ -12,23 +12,30 @@ const PostCard = () => {
   return (
     <View style={styles.postContainer}>
         <View style={styles.avatarSection}>
-            <Avatar />
-              <View>
-                  <Paragraph
-                      variant="lg"
-                      style={styles.userText}
-                  >
-                      Bryan
-                  </Paragraph>
-                <View style={styles.timePosted}>
-                    <Paragraph style={{marginTop:2}}>1 hr</Paragraph>        
-                    <Icon name="user" size={hp(2)} />
+            <View style={{flexDirection:'row', gap:12 }}>
+                <Avatar />
+                <View>
+                    <Paragraph
+                        variant="lg"
+                        style={styles.userText}
+                    >
+                        Bryan
+                    </Paragraph>
+                    <View style={styles.timePosted}>
+                        <Paragraph style={{marginTop:2}}>1 hr</Paragraph>        
+                        <Icon name="user" size={hp(2)} />
+                    </View>
                 </View>
-            </View>  
+            </View>
+            <Icon
+                name="threeDotHorizontal"
+            />
         </View>
-        <PostDetails/>
+          <PostDetails />
         <View style={styles.likeCommentSection}>
-            <Paragraph>Likes & Comments Here</Paragraph>
+            <Icon name="heart" size={26} />
+            <Icon name="comment" size={26} />
+            <Icon name="share" size={26} />
         </View>
     </View>
   )
@@ -45,6 +52,7 @@ const styles = StyleSheet.create({
     },
     avatarSection: {
         flexDirection: 'row',
+        justifyContent:'space-between',
         gap:12
     },
     userText: {
@@ -58,6 +66,7 @@ const styles = StyleSheet.create({
     },
     likeCommentSection: {
         flexDirection: 'row',
+        marginTop:8,
         gap:8
     }
 })

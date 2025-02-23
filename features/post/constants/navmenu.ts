@@ -25,6 +25,11 @@ export const navmenu: INavMenu[] = [
     },
     {
         id: 4,
+        icon: "allusers",
+        link: "/users"
+    },
+    {
+        id: 5,
         icon: "bell",
         link: "/notifications"
     },
