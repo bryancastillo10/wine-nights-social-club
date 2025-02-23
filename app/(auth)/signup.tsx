@@ -2,9 +2,7 @@ import { View, Pressable } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
-import BackButton from '@/components/ui/BackButton';
-import Input from '@/components/ui/Input';
-import Button from '@/components/ui/Button';
+import { BackButton, Button, Input } from '@/components/ui';
 import { Paragraph, TextHeader } from '@/components/typography';
 
 import { authStyle } from '@/style/auth/authScreen.style';
