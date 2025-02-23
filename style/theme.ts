@@ -38,9 +38,10 @@ export const theme = {
         secondary:"Oswald"
     },
     fontSize: {
-        h1: hp(4),
-        h2: hp(3.5),
-        h3: hp(2.5),
+        h1: hp(5),
+        h2: hp(4),
+        h3: hp(3.5),
+        h4: hp(2.5),
         lg: hp(2),
         base: hp(1.7),
         sm: hp(1.2),

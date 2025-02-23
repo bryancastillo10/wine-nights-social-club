@@ -10,7 +10,7 @@ export const authStyle = StyleSheet.create({
         paddingHorizontal: wp(5)
     },
     welcomeTitle: {
-        fontSize: hp(5),
+        fontSize: theme.fontSize.h1,
         textAlign:'center',
         fontFamily: theme.fontFamily.secondary,
         fontWeight: theme.fontWeight.medium,
