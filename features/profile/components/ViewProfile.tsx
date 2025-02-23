@@ -6,7 +6,7 @@ import Icon, {icons} from '@/assets/icons'
 
 import { viewProfileStyle } from '@/style/main/profile.style'
 import { theme } from '@/style/theme'
-import { hp } from '@/utils/dimensions'
+import { hp, wp } from '@/utils/dimensions'
 
 interface UserInfoRowProps {
     icon: keyof typeof icons;
@@ -50,7 +50,7 @@ const ViewProfile = () => {
             <Icon name="user" size={32} strokeWidth={1} />
             <TextHeader>Bryan</TextHeader>
         </View>
-        <View>
+        <View style={{paddingHorizontal: wp(8)}}>
             <UserInfoRow
                 icon="mail"
                 name="Email"
@@ -70,7 +70,12 @@ const ViewProfile = () => {
                 icon="drink"
                 name="Hobby"
                 value="Software development"
-            />  
+              />
+            <UserInfoRow
+                icon="music"
+                name="Fave Song"
+                value="Money For Nothing by Dire Straits"
+            />              
         </View>
     </View>
   )
