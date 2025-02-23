@@ -16,17 +16,10 @@ export const welcomeStyles = StyleSheet.create({
     title: {
         textAlign: 'center',
         color: theme.colors.text,
-        fontWeight: theme.fonts.medium,
-        fontSize: hp(4),
+        fontWeight: theme.fontWeight.medium,
+        fontSize: theme.fontSize.h1,
         letterSpacing:1.5,
         fontFamily: theme.fontFamily.secondary
-    },
-    caption: {
-        textAlign: 'center',
-        paddingHorizontal: wp(6),
-        fontFamily: theme.fontFamily.primary,
-        fontSize: hp(1.7),
-        color: theme.colors.text,
     },
     footer: {
         gap: 30,
@@ -38,11 +31,11 @@ export const welcomeStyles = StyleSheet.create({
         alignItems: 'center',
         fontFamily: theme.fontFamily.primary,
         paddingBottom: hp(6),
-        gap: 5,
+        gap: 6
     },
-    loginText: {
+    linkText: {
         textAlign: 'center',
-        color: theme.colors.text,
-        fontSize: hp(1.7)
+        color: theme.colors.primary,
+        letterSpacing: 1
     }
 });

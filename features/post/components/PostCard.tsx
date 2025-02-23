@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         gap:12
     },
     userText: {
-        fontWeight: theme.fonts.bold,
+        fontWeight: theme.fontWeight.bold,
         fontFamily: theme.fontFamily.primary,
         letterSpacing:0.75,
         fontSize:16,

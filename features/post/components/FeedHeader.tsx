@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: hp(2.5),
-        fontWeight: theme.fonts.medium,
+        fontWeight: theme.fontWeight.medium,
         fontFamily: theme.fontFamily.secondary
     },
     icon: {

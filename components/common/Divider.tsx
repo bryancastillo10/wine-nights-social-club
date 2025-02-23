@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   dividerText: {
     marginHorizontal: 10,
     color: theme.colors.text,
-    fontWeight: theme.fonts.medium,
+    fontWeight: theme.fontWeight.medium,
     fontSize: 18,
   },
 });

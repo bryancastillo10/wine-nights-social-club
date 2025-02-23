@@ -4,9 +4,10 @@ import { useRouter, Href } from 'expo-router';
 
 import ScreenWrapper from '@/components/layout/ScreenWrapper';
 import Button from '@/components/ui/Button';
+import Paragraph from '@/components/ui/Paragraph';
 
 import { welcomeStyles } from '@/style/welcome/welcome.style';
-import { theme } from '@/style/theme';
+import { wp } from '@/utils/dimensions';
 
 const Welcome = () => {
   const welcomeImg = "../assets/images/welcome.png";
@@ -25,10 +26,10 @@ const Welcome = () => {
         
         <View style={{ gap: 20 }}>
                 <Text style={welcomeStyles.title}>Wine Nights Social Club</Text>
-                  <Text style={[welcomeStyles.caption]}>
+                  <Paragraph style={{textAlign:'center', paddingHorizontal: wp(6)}}>
                       Sip, Share, Stay Connected - where every glass poured brings friends closer,
                       every story told lingers like fine wine, and every moment is worth savoring
-                  </Text>
+                  </Paragraph>
            </View>
         </View>
       
@@ -38,18 +39,13 @@ const Welcome = () => {
           onPress={()=>router.push("/signup" as Href)}
         />
         <View style={welcomeStyles.bottomTextContainer}>
-          <Text style={welcomeStyles.loginText}>
+          <Paragraph style={{textAlign:'center'}}>
             Already have an account?
-          </Text>
+          </Paragraph>
           <Pressable onPress={() => router.push("/login" as Href)}>
-            <Text style={[welcomeStyles.loginText,
-                {
-                  color: theme.colors.primaryDark,
-                  fontWeight: theme.fonts.semibold
-                }
-            ]}>
+            <Paragraph style={welcomeStyles.linkText}>
               Login
-            </Text>
+            </Paragraph>
           </Pressable>
         </View>
       </View>

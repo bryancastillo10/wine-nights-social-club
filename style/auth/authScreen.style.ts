@@ -13,7 +13,7 @@ export const authStyle = StyleSheet.create({
         fontSize: hp(5),
         textAlign:'center',
         fontFamily: theme.fontFamily.secondary,
-        fontWeight: theme.fonts.medium,
+        fontWeight: theme.fontWeight.medium,
         letterSpacing: 1.5,
         color: theme.colors.text
     },
@@ -32,7 +32,7 @@ export const authStyle = StyleSheet.create({
     forgotPassword: {
         textAlign: 'right',
         color: theme.colors.text,
-        fontWeight: theme.fonts.bold
+        fontWeight: theme.fontWeight.bold
     },
     footer: {
         flexDirection: 'row',
@@ -43,7 +43,7 @@ export const authStyle = StyleSheet.create({
     footerText: {
         textAlign: 'center',
         color: theme.colors.text,
-        fontWeight: theme.fonts.semibold,
+        fontWeight: theme.fontWeight.semibold,
         fontFamily: theme.fontFamily.primary,
         fontSize: hp(1.6)
     }
