@@ -3,33 +3,32 @@ import { StyleSheet, View, Image, ImageSourcePropType } from 'react-native'
 import { Paragraph } from '@/components/typography'
 import { theme } from '@/style/theme'
 import { hp } from '@/utils/dimensions'
+import { getImageSource } from '@/utils/getImageSource';
 
 
 interface PostDetailsProps {
     mediaType?: "image" | "video" | null;
-    source?: ImageSourcePropType;
+    source?: string;
 }
 
 const PostDetails = ({
     mediaType = null,
     source
     }: PostDetailsProps) => {
-    const natureImg = "../../../assets/preview/nature.jpg";
 
-    // const renderMedia = (mediaType: PostDetailsProps["mediaType"]) => {
-    //     switch (mediaType) {
-    //         case "image":
-    //             return <Image
-    //                 source={source}
-    //                 resizeMode='contain'
-    //                 style={{ width: 100, height: 100 }}
-    //             />
-    //         case "video":
-    //             return <Paragraph>Video Available</Paragraph>
-    //         default:
-    //             return null;
-    //     }
-    // };
+    const renderMedia = (mediaType: PostDetailsProps["mediaType"]) => {
+        switch (mediaType) {
+            case "image":
+                return source ? <Image source={getImageSource(source)}
+                    resizeMode="contain"
+                    style={styles.imagePost}
+                /> : null;
+            case "video":
+                return <Paragraph>Video Available</Paragraph>
+            default:
+                return null;
+        }
+    };
     
     return (
     <View style={{padding: 4}}>
@@ -39,11 +38,7 @@ const PostDetails = ({
             </Paragraph>
         </View>
         <View style={styles.mediaContainer}>
-                <Image
-                    source={require(natureImg)}
-                    resizeMode="contain"
-                    style={styles.imagePost}
-                />
+            {renderMedia(mediaType)}
         </View>
     </View>
   )

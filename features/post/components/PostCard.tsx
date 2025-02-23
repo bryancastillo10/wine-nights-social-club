@@ -3,13 +3,15 @@ import { StyleSheet, View } from 'react-native'
 import Avatar from '@/components/ui/Avatar';
 import { Paragraph } from '@/components/typography';
 import PostDetails from '@/features/post/components/PostDetails';
+import PostAction from '@/features/post/components/PostAction';
 
 import Icon from '@/assets/icons';
 import { theme } from '@/style/theme';
 import { hp, wp } from '@/utils/dimensions';
 
 const PostCard = () => {
-  return (
+ const isSelfPost = true;
+ return (
     <View style={styles.postContainer}>
         <View style={styles.avatarSection}>
             <View style={{flexDirection:'row', gap:12 }}>
@@ -27,15 +29,15 @@ const PostCard = () => {
                     </View>
                 </View>
             </View>
-            <Icon
+            {isSelfPost && (<Icon
                 name="threeDotHorizontal"
-            />
+            />)}
         </View>
-          <PostDetails />
+          <PostDetails source="preview.coffee" mediaType="image" />
         <View style={styles.likeCommentSection}>
-            <Icon name="heart" size={26} />
-            <Icon name="comment" size={26} />
-            <Icon name="share" size={26} />
+              <PostAction icon="heart" count={10} />
+              <PostAction icon="comment" count={1} />
+              <PostAction icon="share"/>
         </View>
     </View>
   )
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     likeCommentSection: {
         flexDirection: 'row',
         marginTop:8,
-        gap:8
+        gap: 10
     }
 })
 
