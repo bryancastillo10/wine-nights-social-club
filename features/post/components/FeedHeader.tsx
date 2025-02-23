@@ -50,6 +50,7 @@ export default FeedHeader
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor:"#F5F5DC50",
         paddingVertical: 8,
         paddingHorizontal: 10,
         borderBottomWidth: 0.5,
