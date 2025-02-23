@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet} from 'react-native'
 import MainPageContainer from '@/components/layout/MainPageContainer'
 import PostCard from '@/features/post/components/PostCard'
 
 const home = () => {
   return (
     <MainPageContainer withHeader>
-      <PostCard/>
+      <PostCard />
     </MainPageContainer>
   )
 }

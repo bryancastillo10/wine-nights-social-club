@@ -46,7 +46,7 @@ const PostCard = () => {
 export default PostCard;
 
 const styles = StyleSheet.create({
-        postContainer: {
+    postContainer: {
         flex:1,
         borderWidth: 0.5,
         borderColor: theme.colors.gray,

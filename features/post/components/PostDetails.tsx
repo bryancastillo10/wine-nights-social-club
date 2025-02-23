@@ -1,10 +1,10 @@
-import { StyleSheet, View, Image, ImageSourcePropType } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 
 import { Paragraph } from '@/components/typography'
-import { theme } from '@/style/theme'
-import { hp } from '@/utils/dimensions'
-import { getImageSource } from '@/utils/getImageSource';
+import VideoScreen from '@/components/ui/VideoScreen';
 
+import { theme } from '@/style/theme'
+import { getImageSource } from '@/utils/getImageSource';
 
 interface PostDetailsProps {
     mediaType?: "image" | "video" | null;
@@ -14,7 +14,11 @@ interface PostDetailsProps {
 const PostDetails = ({
     mediaType = null,
     source
-    }: PostDetailsProps) => {
+}: PostDetailsProps) => {
+    
+    const NoMediaAvailable = (
+        <Paragraph>No Image/Video Available</Paragraph>
+    );
 
     const renderMedia = (mediaType: PostDetailsProps["mediaType"]) => {
         switch (mediaType) {
@@ -22,14 +26,15 @@ const PostDetails = ({
                 return source ? <Image source={getImageSource(source)}
                     resizeMode="contain"
                     style={styles.imagePost}
-                /> : null;
+                /> : NoMediaAvailable;
             case "video":
-                return <Paragraph>Video Available</Paragraph>
+                return source ? <VideoScreen source={source} />
+                : NoMediaAvailable;
             default:
                 return null;
         }
     };
-    
+   
     return (
     <View style={{padding: 4}}>
         <View>
