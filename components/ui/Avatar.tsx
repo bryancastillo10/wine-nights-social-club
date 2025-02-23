@@ -13,7 +13,7 @@ const Avatar = (props: AvatarProps) => {
   const {
         source,
         size = hp(4.5),
-        rounded = theme.radius.md
+        rounded = theme.radius.lg
     } = props;
      
   const imageSource = "../../assets/images/defaultuser.png";

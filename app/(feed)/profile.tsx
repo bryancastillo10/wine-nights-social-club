@@ -1,15 +1,19 @@
 import MainPageContainer from '@/components/layout/MainPageContainer'
-import { Paragraph } from '@/components/typography'
+import { View } from 'react-native';
 
 import { BackButton } from '@/components/ui'
+
+import ViewProfile from '@/features/profile/components/ViewProfile';
 
 const profile = () => {
   return (
       <MainPageContainer withHeader={false}>
-        <BackButton/>
-            <Paragraph>Your Profile</Paragraph>
+        <BackButton />
+        <View style={{marginTop: 24}}>
+            <ViewProfile />
+        </View>
       </MainPageContainer>
   )
 }
 
-export default profile
+export default profile;
