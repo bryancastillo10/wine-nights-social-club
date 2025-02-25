@@ -17,7 +17,7 @@ const PostDetails = ({
     source,
     content
 }: PostDetailsProps) => {
-    
+ 
     const NoMediaAvailable = (
         <Paragraph>No Image/Video Available</Paragraph>
     );
