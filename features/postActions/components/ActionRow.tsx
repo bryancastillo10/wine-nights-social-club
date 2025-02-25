@@ -1,12 +1,19 @@
 import { StyleSheet, View } from 'react-native'
 import IndividualAction from '@/features/postActions/components/IndividualAction';
 
-const ActionRow = () => {
+export interface ActionRowProps{
+  likesCount: number;
+  commentsCount: number;
+  sharesCount: number;
+}
+
+const ActionRow = (props: ActionRowProps) => {
+  const { likesCount, commentsCount, sharesCount } = props;
   return (
      <View style={styles.container}>
-      <IndividualAction icon="heart" count={10} />
-      <IndividualAction icon="comment" count={1} />
-      <IndividualAction icon="share"/>
+      <IndividualAction icon="heart" count={likesCount} />
+      <IndividualAction icon="comment" count={commentsCount} />
+      <IndividualAction icon="share" count={sharesCount} />
     </View>
   )
 }

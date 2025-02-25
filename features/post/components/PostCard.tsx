@@ -19,6 +19,9 @@ const PostCard = (props: PostCardProps) => {
         user,
         post,
         isSelfPost,
+        likesCount,
+        commentsCount,
+        sharesCount,
         handleEdit,
         handleDelete
     } = props;
@@ -68,7 +71,11 @@ const toggleMoreOpen = () => {
              mediaType={post.mediaType}
              content={post.content}
         />
-        <ActionRow/>
+        <ActionRow
+            likesCount={likesCount}
+            commentsCount={commentsCount}
+            sharesCount={sharesCount}
+         />
     </View>
   )
 }
