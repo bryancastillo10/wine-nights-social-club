@@ -7,15 +7,17 @@ import { theme } from '@/style/theme'
 import { getImageSource } from '@/utils/getImageSource';
 
 interface PostDetailsProps {
-    mediaType?: "image" | "video" | null;
-    source?: string;
+    mediaType: "image" | "video" | null;
+    source: string | null;
+    content?: string;
 }
 
 const PostDetails = ({
     mediaType = null,
-    source
+    source,
+    content
 }: PostDetailsProps) => {
-    
+ 
     const NoMediaAvailable = (
         <Paragraph>No Image/Video Available</Paragraph>
     );
@@ -38,8 +40,8 @@ const PostDetails = ({
     return (
     <View style={{padding: 4}}>
         <View>
-            <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit optio harum
-                    expedita ad ipsa voluptates sit atque rerum nemo dolores!
+            <Paragraph>
+                   {content} 
             </Paragraph>
         </View>
         <View style={styles.mediaContainer}>

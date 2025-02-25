@@ -33,7 +33,7 @@ const FeedHeader = () => {
         <View style={styles.navContainer}>
             <View style={styles.navLeftContainer}>
                 <Pressable onPress={() => router.push("/(feed)/profile" as Href)}>
-                      <Avatar />
+                      <Avatar source="preview.defaultprofpic" />
                 </Pressable>
                 {navmenu.map((nav) => (
                     <Pressable key={nav.id} onPress={() => router.push(nav.link as Href)}>

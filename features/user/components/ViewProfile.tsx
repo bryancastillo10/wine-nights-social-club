@@ -34,7 +34,7 @@ const ViewProfile = () => {
   return (
     <View style={viewProfileStyle.container}>
         <View style={viewProfileStyle.avatarContainer}>
-            <Avatar size={hp(12)} rounded={theme.radius.xxl*2} />
+            <Avatar source={"preview.defaultprofpic"} size={hp(12)} rounded={theme.radius.xxl*2} />
             <Pressable
                 style={viewProfileStyle.editIcon}
                 onPress={() => {}}

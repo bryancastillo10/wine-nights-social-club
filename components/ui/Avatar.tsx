@@ -1,7 +1,8 @@
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, ImageSourcePropType } from 'react-native';
 
 import { theme } from '@/style/theme';
 import { hp } from '@/utils/dimensions';
+import { getImageSource } from '@/utils/getImageSource';
 
 interface AvatarProps {
     source?: string;
@@ -16,10 +17,11 @@ const Avatar = (props: AvatarProps) => {
         rounded = theme.radius.lg
     } = props;
      
-  const imageSource = "../../assets/images/defaultuser.png";
+  const imageSource = source ? getImageSource(source) : 
+  "../../assets/images/defaultuser.png";
   return (
       <Image
-          source={require(imageSource) || source}
+          source={imageSource as ImageSourcePropType}
           style={[
             styles.avatar,
             {

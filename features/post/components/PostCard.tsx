@@ -5,15 +5,27 @@ import Avatar from '@/components/ui/Avatar';
 import { Paragraph } from '@/components/typography';
 
 import PostDetails from '@/features/post/components/PostDetails';
-import PostAction from '@/features/post/components/PostAction';
+import ActionRow from '@/features/postActions/components/ActionRow';
 
 import Icon from '@/assets/icons';
 import { cardStyles } from '@/style/main/postCard.style';
 import { hp } from '@/utils/dimensions';
 
-const PostCard = () => {
-const isSelfPost = true;
+import { PostCardProps } from '@/features/post/types/postCardProps';
+import { timeElapsed } from '@/utils/formatElapsedTime';
 
+const PostCard = (props: PostCardProps) => {
+    const {
+        user,
+        post,
+        isSelfPost,
+        likesCount,
+        commentsCount,
+        sharesCount,
+        handleEdit,
+        handleDelete
+    } = props;
+    
 const [isMoreOpen, setIsMoreOpen] = useState<boolean>(false);
 const toggleMoreOpen = () => {
     setIsMoreOpen(!isMoreOpen);
@@ -23,16 +35,18 @@ const toggleMoreOpen = () => {
     <View style={cardStyles.postContainer}>
         <View style={cardStyles.avatarSection}>
             <View style={{flexDirection:'row', gap:12 }}>
-                <Avatar />
+                <Avatar source={user.profilePic} />
                 <View>
                     <Paragraph
                         variant="lg"
                         style={cardStyles.userText}
                     >
-                        Bryan
+                        {user.username}
                     </Paragraph>
                     <View style={cardStyles.timePosted}>
-                        <Paragraph style={{marginTop:2}}>1 hr</Paragraph>        
+                         <Paragraph style={{ marginTop: 2 }}>
+                            {timeElapsed(post.createdAt)}
+                         </Paragraph>        
                         <Icon name="user" size={hp(2)} />
                     </View>
                 </View>
@@ -44,22 +58,27 @@ const toggleMoreOpen = () => {
              
             {isMoreOpen &&
                 <View style={cardStyles.moreAction}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleEdit}>
                         <Paragraph>Edit</Paragraph>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleDelete}>
                         <Paragraph>Delete</Paragraph>
                     </TouchableOpacity>
                 </View>}
         </View>
-          <PostDetails source="preview.coffee" mediaType="image" />
-        <View style={cardStyles.likeCommentSection}>
-              <PostAction icon="heart" count={10} />
-              <PostAction icon="comment" count={1} />
-              <PostAction icon="share"/>
-        </View>
+        <PostDetails
+             source={post.mediaUrl}
+             mediaType={post.mediaType}
+             content={post.content}
+        />
+        <ActionRow
+            likesCount={likesCount}
+            commentsCount={commentsCount}
+            sharesCount={sharesCount}
+         />
     </View>
   )
 }
 
 export default PostCard;
+ 
