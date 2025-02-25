@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { BackButton } from '@/components/ui'
 
-import ViewProfile from '@/features/profile/components/ViewProfile';
+import ViewProfile from '@/features/user/components/ViewProfile';
 
 const profile = () => {
   return (

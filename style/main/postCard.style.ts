@@ -23,11 +23,6 @@ export const cardStyles = StyleSheet.create({
         alignItems: "center",
         gap: 6
     },
-    likeCommentSection: {
-        flexDirection: 'row',
-        marginTop:8,
-        gap: 10
-    },
     moreAction: {
         position: 'absolute',
         gap: 6,
