@@ -5,7 +5,7 @@ import Avatar from '@/components/ui/Avatar';
 import { Paragraph } from '@/components/typography';
 
 import PostDetails from '@/features/post/components/PostDetails';
-import PostAction from '@/features/post/components/PostAction';
+import ActionRow from '@/features/postActions/components/ActionRow';
 
 import Icon from '@/assets/icons';
 import { cardStyles } from '@/style/main/postCard.style';
@@ -53,11 +53,7 @@ const toggleMoreOpen = () => {
                 </View>}
         </View>
           <PostDetails source="preview.coffee" mediaType="image" />
-        <View style={cardStyles.likeCommentSection}>
-              <PostAction icon="heart" count={10} />
-              <PostAction icon="comment" count={1} />
-              <PostAction icon="share"/>
-        </View>
+        <ActionRow/>
     </View>
   )
 }

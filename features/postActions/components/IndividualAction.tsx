@@ -11,7 +11,7 @@ interface PostActionProps {
   count?: number;
 };
 
-const PostAction = ({icon,onPress,count}: PostActionProps) => {
+const IndividualAction = ({icon,onPress,count}: PostActionProps) => {
   return (
     <View style={styles.actionContainer}>
       <Pressable onPress={onPress}>
@@ -26,7 +26,7 @@ const PostAction = ({icon,onPress,count}: PostActionProps) => {
   )
 }
 
-export default PostAction;
+export default IndividualAction;
 
 const styles = StyleSheet.create({
     actionContainer: {
