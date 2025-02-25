@@ -3,7 +3,7 @@ export interface IPost {
     userId: string;
     content: string;
     mediaUrl: string | null; 
-    mediaType: string | null;
+    mediaType: "image" | "video" | null;
     createdAt: string;
     updatedAt: string;
 }
