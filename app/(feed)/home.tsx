@@ -9,10 +9,9 @@ import { postShares } from '@/features/postActions/api/shareMockData';
 
 const Home = () => {
   const loggedInUserId = "1001";
-  const post = posts.find(p => p.postId === loggedInUserId)
   
   return (
-        <MainPageContainer withHeader>
+    <MainPageContainer withHeader>
       {posts.map((post) => {
         const user = users.find(u => u.userId === post.userId);
         if (!user) return null;
@@ -38,7 +37,7 @@ const Home = () => {
             handleDelete={() => console.log("Deleting post:", post.postId)}
           />
         );
-      })}
+      })}      
     </MainPageContainer>
   )
 }

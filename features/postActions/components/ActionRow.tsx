@@ -9,11 +9,21 @@ export interface ActionRowProps{
 
 const ActionRow = (props: ActionRowProps) => {
   const { likesCount, commentsCount, sharesCount } = props;
+
   return (
      <View style={styles.container}>
-      <IndividualAction icon="heart" count={likesCount} />
-      <IndividualAction icon="comment" count={commentsCount} />
-      <IndividualAction icon="share" count={sharesCount} />
+      <IndividualAction
+        icon="heart"
+        count={likesCount}
+      />
+      <IndividualAction
+        icon="comment"
+        count={commentsCount}
+      />
+      <IndividualAction
+        icon="share"
+        count={sharesCount}
+      />
     </View>
   )
 }
