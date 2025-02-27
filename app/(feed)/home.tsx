@@ -9,7 +9,7 @@ import { postShares } from '@/features/postActions/api/shareMockData';
 
 const Home = () => {
   const loggedInUserId = "1001";
-  
+
   return (
     <MainPageContainer withHeader>
       {posts.map((post) => {
@@ -21,6 +21,9 @@ const Home = () => {
         const commentsCount = comments.filter(comment => comment.postId === post.postId).length;
         const sharesCount = postShares.filter(share => share.postId === post.postId).length;
      
+        // Comment Per Post
+        const postComments = comments.filter(comment => comment.postId === post.postId);
+        
         // Validating if the post is by authUser
         const isSelfPost = post.userId === loggedInUserId;
 
@@ -29,6 +32,7 @@ const Home = () => {
             key={post.postId}
             user={user}
             post={post}
+            comments={postComments}
             isSelfPost={isSelfPost}
             likesCount={likesCount}
             commentsCount={commentsCount}
@@ -37,7 +41,7 @@ const Home = () => {
             handleDelete={() => console.log("Deleting post:", post.postId)}
           />
         );
-      })}      
+      })} 
     </MainPageContainer>
   )
 }

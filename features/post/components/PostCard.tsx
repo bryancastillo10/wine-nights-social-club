@@ -14,10 +14,13 @@ import { hp } from '@/utils/dimensions';
 import { PostCardProps } from '@/features/post/types/postCardProps';
 import { timeElapsed } from '@/utils/formatElapsedTime';
 
+import BottomSheetContainer from '@/components/layout/BottomSheetContainer';
+    
 const PostCard = (props: PostCardProps) => {
     const {
         user,
         post,
+        comments,
         isSelfPost,
         likesCount,
         commentsCount,
@@ -26,57 +29,72 @@ const PostCard = (props: PostCardProps) => {
         handleDelete
     } = props;
     
-const [isMoreOpen, setIsMoreOpen] = useState<boolean>(false);
-const toggleMoreOpen = () => {
-    setIsMoreOpen(!isMoreOpen);
-}
+    const [isMoreOpen, setIsMoreOpen] = useState<boolean>(false);
+    const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
     
- return (
-    <View style={cardStyles.postContainer}>
-        <View style={cardStyles.avatarSection}>
-            <View style={{flexDirection:'row', gap:12 }}>
-                <Avatar source={user.profilePic} />
-                <View>
-                    <Paragraph
-                        variant="lg"
-                        style={cardStyles.userText}
-                    >
-                        {user.username}
-                    </Paragraph>
-                    <View style={cardStyles.timePosted}>
-                         <Paragraph style={{ marginTop: 2 }}>
-                            {timeElapsed(post.createdAt)}
-                         </Paragraph>        
-                        <Icon name="user" size={hp(2)} />
+    const toggleMoreOpen = () => { setIsMoreOpen(!isMoreOpen); };
+    const toggleIsCommentOpen = () => { setIsCommentOpen(!isCommentOpen) };
+  
+    return (
+        <View style={cardStyles.postContainer}>
+            <View style={cardStyles.avatarSection}>
+                <View style={{flexDirection:'row', gap:12 }}>
+                    <Avatar source={user.profilePic} />
+                    <View>
+                        <Paragraph
+                            variant="lg"
+                            style={cardStyles.userText}
+                        >
+                            {user.username}
+                        </Paragraph>
+                        <View style={cardStyles.timePosted}>
+                            <Paragraph style={{ marginTop: 2 }}>
+                                {timeElapsed(post.createdAt)}
+                            </Paragraph>        
+                            <Icon name="user" size={hp(2)} />
+                        </View>
                     </View>
                 </View>
+                {isSelfPost &&
+                    (<Pressable onPress={toggleMoreOpen}><Icon
+                    name="threeDotHorizontal"
+                    /></Pressable>)}
+                
+                {isMoreOpen &&
+                    <View style={cardStyles.moreAction}>
+                        <TouchableOpacity onPress={handleEdit}>
+                            <Paragraph>Edit</Paragraph>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handleDelete}>
+                            <Paragraph>Delete</Paragraph>
+                        </TouchableOpacity>
+                    </View>}
             </View>
-             {isSelfPost &&
-                (<Pressable onPress={toggleMoreOpen}><Icon
-                   name="threeDotHorizontal"
-                /></Pressable>)}
-             
-            {isMoreOpen &&
-                <View style={cardStyles.moreAction}>
-                    <TouchableOpacity onPress={handleEdit}>
-                        <Paragraph>Edit</Paragraph>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={handleDelete}>
-                        <Paragraph>Delete</Paragraph>
-                    </TouchableOpacity>
-                </View>}
+            <PostDetails
+                source={post.mediaUrl}
+                mediaType={post.mediaType}
+                content={post.content}
+            />
+            <ActionRow
+                likesCount={likesCount}
+                commentsCount={commentsCount}
+                sharesCount={sharesCount}
+                openComment={toggleIsCommentOpen}
+            />
+            
+            {isCommentOpen && (
+            <BottomSheetContainer
+                isOpen={isCommentOpen}
+                toggleOpen={toggleIsCommentOpen}
+            >
+            {comments.map((comm) => (
+                <Paragraph key={comm.commentId}>
+                    {comm.textComment}
+                </Paragraph>
+            ))}
+            </BottomSheetContainer>
+            )}
         </View>
-        <PostDetails
-             source={post.mediaUrl}
-             mediaType={post.mediaType}
-             content={post.content}
-        />
-        <ActionRow
-            likesCount={likesCount}
-            commentsCount={commentsCount}
-            sharesCount={sharesCount}
-         />
-    </View>
   )
 }
 
