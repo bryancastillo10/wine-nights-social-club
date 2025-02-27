@@ -1,14 +1,20 @@
-import { StyleSheet, Modal, Pressable } from 'react-native'
+import { StyleSheet, View, Modal, Pressable } from 'react-native'
+import { Paragraph } from '@/components/typography';
 import { theme } from '@/style/theme';
 
 interface BottomSheetContainerProps {
     isOpen: boolean;
+    sheetTitle?: string;
     toggleOpen: () => void;
     children: React.ReactNode;
 }
 
 const BottomSheetContainer = (props: BottomSheetContainerProps) => {
-    const { children, isOpen, toggleOpen } = props
+    const {
+        children,
+        isOpen,
+        sheetTitle = "Sheet Title",
+        toggleOpen } = props
     return (
         <Modal
             visible={isOpen}
@@ -20,7 +26,15 @@ const BottomSheetContainer = (props: BottomSheetContainerProps) => {
             onPress={toggleOpen}
             >
             <Pressable style={styles.container} onPress={() => {}}>
-              {children}
+               <View style={styles.header}>
+                <Paragraph 
+                    variant='lg'
+                    style={{ letterSpacing: 2, fontWeight: 700}}       
+                >
+                    {sheetTitle}
+                </Paragraph>
+                </View>  
+                {children}
             </Pressable> 
         </Pressable>
     </Modal>
@@ -40,5 +54,13 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "55%",
         backgroundColor: theme.colors.snow
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderRadius: theme.radius.xl,
+        padding:4,
+        margin:10
     }
 })
