@@ -1,9 +1,13 @@
 import { useRef, useEffect } from 'react';
-import { IComments } from '@/features/postActions/api/interface';
-import { StyleSheet, Text, TextInput, FlatList, View } from 'react-native';
+
+import { StyleSheet, TextInput, FlatList, View } from 'react-native';
+import { Paragraph } from '@/components/typography';
+
 import { theme } from '@/style/theme';
-import CommentItem from '@/features/postActions/components/CommentItem';
 import { wp } from '@/utils/dimensions';
+
+import { IComments } from '@/features/postActions/api/interface';
+import CommentItem from '@/features/postActions/components/CommentItem';
 
 interface CommentBlockProps {
   comments: IComments[];
@@ -23,16 +27,16 @@ const CommentBlock = ({ comments }: CommentBlockProps) => {
       {comments.length > 0 ? (
         <FlatList
           data={comments.filter((comm) => comm.parentCommentId === null)}
-          keyExtractor={(item) => item.commentId}
+          keyExtractor={(i) => i.commentId}
           renderItem={({ item }) => (
             <CommentItem {...item} allComments={comments} level={0} />
           )}
         />
       ) : (
         <View style={styles.noComments}>
-          <Text style={styles.noCommentsText}>
+          <Paragraph style={styles.noCommentsText}>
             No comments yet. Be the first to comment!
-          </Text>
+          </Paragraph>
           <TextInput
             ref={inputRef}
             style={styles.input}

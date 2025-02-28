@@ -10,7 +10,7 @@ export const timeElapsed = (createdAt: string) => {
   
   const hours = Math.floor(diff / (1000 * 60 * 60));
     if (hours < 24) {
-        return `${hours} hour`;
+        return `${hours} hr`;
   }
   
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
