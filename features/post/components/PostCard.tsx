@@ -15,8 +15,8 @@ import { PostCardProps } from '@/features/post/types/postCardProps';
 import { timeElapsed } from '@/utils/formatElapsedTime';
 
 import BottomSheetContainer from '@/components/layout/BottomSheetContainer';
-import CommentSection from '@/features/postActions/components/CommentSection';
-    
+import CommentBlock from '@/features/post/components/CommentBlock';
+
 const PostCard = (props: PostCardProps) => {
     const {
         user,
@@ -81,21 +81,15 @@ const PostCard = (props: PostCardProps) => {
                 commentsCount={commentsCount}
                 sharesCount={sharesCount}
                 openComment={toggleIsCommentOpen}
-            />
-            
+            />       
             {isCommentOpen && (
-            <BottomSheetContainer
-                sheetTitle='Comments'
-                isOpen={isCommentOpen}
-                toggleOpen={toggleIsCommentOpen}
-            >     
-            {comments.map((comm) => (
-                <CommentSection
-                    key={comm.commentId}
-                    {...comm}
-                />
-            ))}
-            </BottomSheetContainer>
+                <BottomSheetContainer
+                    sheetTitle='Comments'
+                    isOpen={isCommentOpen}
+                    toggleOpen={toggleIsCommentOpen}
+                >     
+                    <CommentBlock comments={comments}/>    
+                </BottomSheetContainer>
             )}
         </View>
   )
