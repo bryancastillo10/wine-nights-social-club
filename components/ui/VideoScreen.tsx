@@ -12,7 +12,7 @@ const VideoScreen = ({source}:VideoScreenProps) => {
 
   const player = useVideoPlayer(source, player => {
     player.loop = true;
-    player.play();
+    // player.play();
   });
   
 
