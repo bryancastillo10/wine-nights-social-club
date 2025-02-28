@@ -29,7 +29,7 @@ const PostCard = (props: PostCardProps) => {
         handleEdit,
         handleDelete
     } = props;
-    
+    console.log(comments);
     const [isMoreOpen, setIsMoreOpen] = useState<boolean>(false);
     const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
     

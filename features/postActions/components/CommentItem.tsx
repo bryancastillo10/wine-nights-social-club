@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { IComments } from '@/features/postActions/api/interface';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { INestedComments } from '@/features/postActions/api/interface';
 import { Paragraph } from '@/components/typography';
 import { getUserById } from '@/utils/getUserById';
 import { Avatar } from '@/components/ui';
@@ -9,8 +9,8 @@ import { timeElapsed } from '@/utils/formatElapsedTime';
 import { hp, wp } from '@/utils/dimensions';
 import Icon from '@/assets/icons';
 
-interface CommentItemProps extends IComments {
-  allComments: IComments[];
+
+interface CommentItemProps extends INestedComments {
   level?: number;
 }
 
@@ -19,15 +19,10 @@ const CommentItem = ({
   textComment,
   userId,
   createdAt,
-  allComments,
+  replies,
   level = 0,
 }: CommentItemProps) => {
   const user = getUserById(userId);
-
-  const nestedComments = allComments.filter(
-    (comm) => comm.parentCommentId === commentId
-  );
-
   const dynamicStyle = level >= 1 ? { marginLeft: hp(2) } : {};
 
   return (
@@ -35,7 +30,7 @@ const CommentItem = ({
       <View style={styles.itemHeader}>
         <View style={styles.userInfo}>
           {user && <Avatar source={user.profilePic} />}
-          <Paragraph 
+          <Paragraph
             variant="lg"
             style={{ fontWeight: theme.fontWeight.bold, letterSpacing: 0.75 }}
           >
@@ -44,23 +39,21 @@ const CommentItem = ({
         </View>
         <View style={styles.time}>
           <Icon size={18} name="time" />
-          <Paragraph variant="sm">
-            {timeElapsed(createdAt)}
-          </Paragraph>
+          <Paragraph variant="sm">{timeElapsed(createdAt)}</Paragraph>
         </View>
       </View>
       <View style={styles.textContainer}>
         <Paragraph>{textComment}</Paragraph>
       </View>
-      
-      {nestedComments.map((nested) => (
-        <CommentItem
-          key={nested.commentId}
-          {...nested}
-          allComments={allComments}
-          level={level + 1}
-        />
-      ))}
+
+      {/* Render nested replies if they exist */}
+      {replies && replies.length > 0 && (
+        <View style={styles.repliesContainer}>
+          {replies.map((nested) => (
+            <CommentItem key={nested.commentId} {...nested} level={level + 1} />
+          ))}
+        </View>
+      )}
     </View>
   );
 };
@@ -69,18 +62,18 @@ export default CommentItem;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
     flexDirection: "column",
+    marginVertical: hp(1),
   },
   userInfo: {
     flexDirection: "row",
-    alignItems:"center",
+    alignItems: "center",
     gap: hp(1),
   },
   itemHeader: {
     flexDirection: "row",
-    justifyContent: 'space-between',
-    width: "100%"
+    justifyContent: "space-between",
+    width: "100%",
   },
   textContainer: {
     marginTop: hp(1.5),
@@ -88,10 +81,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   time: {
-    display: "flex",
     flexDirection: "row",
-    justifyContent:"flex-end",
-    alignItems:"center",
-    gap: wp(1.5)
+    justifyContent: "flex-end",
+    alignItems: "center",
+    gap: wp(1.5),
+  },
+  repliesContainer: {
+    marginTop: hp(1),
   },
 });
