@@ -1,59 +1,103 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { INestedComments } from '@/features/postActions/api/interface';
+import React, { useState, useRef, useEffect } from 'react';
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import { Paragraph } from '@/components/typography';
-import { getUserById } from '@/utils/getUserById';
-import { Avatar } from '@/components/ui';
+import { INestedComments } from '@/features/postActions/api/interface';
 import { theme } from '@/style/theme';
-import { timeElapsed } from '@/utils/formatElapsedTime';
-import { hp, wp } from '@/utils/dimensions';
-import Icon from '@/assets/icons';
 
-
-interface CommentItemProps extends INestedComments {
+interface CommentItemProps {
+  comment: INestedComments;
   level?: number;
 }
 
-const CommentItem = ({
-  commentId,
-  textComment,
-  userId,
-  createdAt,
-  replies,
-  level = 0,
-}: CommentItemProps) => {
-  const user = getUserById(userId);
-  const dynamicStyle = level >= 1 ? { marginLeft: hp(2) } : {};
+const CommentItem = ({ comment, level = 0 }: CommentItemProps) => {
+  const [input, setInput] = useState('');
+  const [editMode, setEditMode] = useState(false);
+  const [showReplyInput, setShowReplyInput] = useState(false);
+  const inputRef = useRef<TextInput>(null);
+
+  useEffect(() => {
+    if (editMode && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [editMode]);
 
   return (
-    <View style={[styles.container, dynamicStyle]}>
-      <View style={styles.itemHeader}>
-        <View style={styles.userInfo}>
-          {user && <Avatar source={user.profilePic} />}
-          <Paragraph
-            variant="lg"
-            style={{ fontWeight: theme.fontWeight.bold, letterSpacing: 0.75 }}
-          >
-            {user?.username}
-          </Paragraph>
+    <View style={[styles.container, { marginLeft: level > 0 ? 20 : 0 }]}>
+      <View style={styles.commentContainer}>
+        {editMode ? (
+          <TextInput
+            ref={inputRef}
+            style={styles.editableText}
+            value={input || comment.textComment}
+            onChangeText={setInput}
+            autoFocus
+          />
+        ) : (
+          <Paragraph>{comment.textComment}</Paragraph>
+        )}
+        <View style={styles.actionContainer}>
+          {editMode ? (
+            <>
+              <TouchableOpacity style={styles.actionButton} onPress={() => {}}>
+                <Paragraph style={styles.actionText}>SAVE</Paragraph>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.actionButton}
+                onPress={() => {
+                  setInput(comment.textComment);
+                  setEditMode(false);
+                }}>
+                <Paragraph style={styles.actionText}>CANCEL</Paragraph>
+              </TouchableOpacity>
+            </>
+          ) : (
+            <>
+              <TouchableOpacity
+                style={styles.actionButton}
+                onPress={() => setShowReplyInput(!showReplyInput)}>
+                <Paragraph style={styles.actionText}>
+                  {showReplyInput ? 'CANCEL REPLY' : 'REPLY'}
+                </Paragraph>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.actionButton}
+                onPress={() => {
+                  setEditMode(true);
+                  setInput(comment.textComment);
+                }}>
+                <Paragraph style={styles.actionText}>EDIT</Paragraph>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.actionButton} onPress={() => {}}>
+                <Paragraph style={styles.actionText}>DELETE</Paragraph>
+              </TouchableOpacity>
+            </>
+          )}
         </View>
-        <View style={styles.time}>
-          <Icon size={18} name="time" />
-          <Paragraph variant="sm">{timeElapsed(createdAt)}</Paragraph>
-        </View>
-      </View>
-      <View style={styles.textContainer}>
-        <Paragraph>{textComment}</Paragraph>
       </View>
 
-      {/* Render nested replies if they exist */}
-      {replies && replies.length > 0 && (
-        <View style={styles.repliesContainer}>
-          {replies.map((nested) => (
-            <CommentItem key={nested.commentId} {...nested} level={level + 1} />
-          ))}
+      {showReplyInput && (
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.textInput}
+            value={input}
+            onChangeText={setInput}
+            placeholder="type reply..."
+            autoFocus
+          />
+          <TouchableOpacity style={styles.actionButton} onPress={() => {}}>
+            <Paragraph style={styles.actionText}>REPLY</Paragraph>
+          </TouchableOpacity>
         </View>
       )}
+      
+      {comment.replies.map((reply) => (
+        <CommentItem key={reply.commentId} comment={reply} level={level + 1 } />
+      ))}
     </View>
   );
 };
@@ -62,31 +106,51 @@ export default CommentItem;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
-    marginVertical: hp(1),
+    marginVertical: 4,
   },
-  userInfo: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: hp(1),
+  commentContainer: {
+    backgroundColor: 'rgba(211,211,211,0.88)',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    width: 300,
+    borderRadius: 5,
   },
-  itemHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
+  editableText: {
+    fontSize: 14,
+    borderWidth: 1,
+    borderColor: theme.colors.gray,
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: theme.colors.snow,
   },
-  textContainer: {
-    marginTop: hp(1.5),
-    marginLeft: wp(1),
+  actionContainer: {
+    flexDirection: 'row',
+    marginTop: 5,
+  },
+  actionButton: {
+    padding: 5,
+    backgroundColor: theme.colors.primary,
+    borderRadius: 5,
+    marginRight: 5,
+  },
+  actionText: {
+    fontSize: 12,
+    color: '#fff',
+    fontWeight: '600',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    marginBottom: 5,
+    marginTop: 5,
+  },
+  textInput: {
     flex: 1,
-  },
-  time: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    gap: wp(1.5),
-  },
-  repliesContainer: {
-    marginTop: hp(1),
+    padding: 5,
+    borderWidth: 1,
+    borderColor: 'lightgray',
+    borderRadius: 5,
+    backgroundColor: theme.colors.textLight,
   },
 });
