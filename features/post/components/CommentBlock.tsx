@@ -1,6 +1,7 @@
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import { INestedComments } from "@/features/postActions/api/interface"
 import CommentItem from "@/features/postActions/components/CommentItem";
+import { hp } from "@/utils/dimensions";
 
 interface CommentBlockProps {
   comments: INestedComments[];
@@ -8,14 +9,14 @@ interface CommentBlockProps {
 
 const CommentBlock = ({comments}: CommentBlockProps) => {
   return (
-    <View>
+    <ScrollView style={{padding: hp(2)}}>
     {comments.map((comment) => (
         <CommentItem
           key={comment.commentId}
           comment={comment}
         />
     ))}
-    </View>
+    </ScrollView>
   )
 }
 
