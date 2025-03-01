@@ -6,12 +6,9 @@ import {
   StyleSheet,
 } from 'react-native';
 import { INestedComments } from '@/features/comments/api/interface';
-
 import { Paragraph } from '@/components/typography';
-
 import { theme } from '@/style/theme';
 import Icon from '@/assets/icons';
-
 import CommentDetails from './CommentHeader';
 
 interface CommentItemProps {
@@ -20,11 +17,15 @@ interface CommentItemProps {
 }
 
 const CommentItem = ({ comment, level = 0 }: CommentItemProps) => {
+  const loggedInUserId = "1001";
+  
   const [input, setInput] = useState('');
   const [editMode, setEditMode] = useState(false);
   const [showReplyInput, setShowReplyInput] = useState(false);
   const inputRef = useRef<TextInput>(null);
-  
+
+  const isSelfComment = comment.userId === loggedInUserId;
+
   useEffect(() => {
     if (editMode && inputRef.current) {
       inputRef.current.focus();
@@ -32,7 +33,7 @@ const CommentItem = ({ comment, level = 0 }: CommentItemProps) => {
   }, [editMode]);
 
   return (
-    <View style={[styles.container, { marginLeft: level > 0 ? 20 : 0 }]}>
+     <View style={[styles.container, { marginLeft: level > 0 ? 20 : 0 }]}>
       <View style={styles.commentContainer}>
         {editMode ? (
           <TextInput
@@ -43,51 +44,60 @@ const CommentItem = ({ comment, level = 0 }: CommentItemProps) => {
             autoFocus
           />
         ) : (
-            <CommentDetails
-              userId={comment.userId}
-              createdAt={comment.createdAt}
-              textComment={comment.textComment}              
-            />
+          <CommentDetails
+            userId={comment.userId}
+            createdAt={comment.createdAt}
+            textComment={comment.textComment}              
+          />
         )}
         <View style={styles.actionContainer}>
-          {editMode ? (
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => setShowReplyInput(!showReplyInput)}>
+            <Paragraph style={styles.actionText}>
+              {showReplyInput ? 'cancel reply' : 'reply'}
+            </Paragraph>
+          </TouchableOpacity>
+
+          {isSelfComment && (
             <>
-              <TouchableOpacity style={styles.actionButton} onPress={() => {}}>
-                <Paragraph style={styles.actionText}>SAVE</Paragraph>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.actionButton}
-                onPress={() => {
-                  setInput(comment.textComment);
-                  setEditMode(false);
-                }}>
-                <Paragraph style={styles.actionText}>CANCEL</Paragraph>
-              </TouchableOpacity>
-            </>
-          ) : (
-            <>
-              <TouchableOpacity
-                style={styles.actionButton}
-                onPress={() => setShowReplyInput(!showReplyInput)}>
-                <Paragraph style={styles.actionText}>
-                  {showReplyInput ? 'CANCEL REPLY' : 'REPLY'}
-                </Paragraph>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.actionButton}
-                onPress={() => {
-                  setEditMode(true);
-                  setInput(comment.textComment);
-                }}>
-                  <Paragraph style={styles.actionText}>
-                    <Icon name="edit" size={16} color={theme.colors.snow} />
-                  </Paragraph>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.actionButton} onPress={() => {}}>
-                  <Paragraph style={styles.actionText}>
-                    <Icon name="delete" size={16} color={theme.colors.snow} />
-                  </Paragraph>
-              </TouchableOpacity>
+              {editMode ? (
+                <>
+                  <TouchableOpacity
+                    style={styles.actionButton}
+                    onPress={() => {setEditMode(false);}}>
+                    <Paragraph style={styles.actionText}>SAVE</Paragraph>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.actionButton}
+                    onPress={() => {
+                      setInput(comment.textComment);
+                      setEditMode(false);
+                    }}>
+                    <Paragraph style={styles.actionText}>CANCEL</Paragraph>
+                  </TouchableOpacity>
+                </>
+              ) : (
+                <>
+                  <TouchableOpacity
+                    style={styles.actionButton}
+                    onPress={() => {
+                      setEditMode(true);
+                      setInput(comment.textComment);
+                    }}>
+                    <Paragraph style={styles.actionText}>
+                      <Icon name="edit" size={16} color={theme.colors.snow} />
+                    </Paragraph>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.actionButton}
+                    onPress={() => {}}>
+                    <Paragraph style={styles.actionText}>
+                      <Icon name="delete" size={16} color={theme.colors.snow} />
+                    </Paragraph>
+                  </TouchableOpacity>
+                </>
+              )}
             </>
           )}
         </View>
@@ -102,19 +112,33 @@ const CommentItem = ({ comment, level = 0 }: CommentItemProps) => {
             placeholder="type reply..."
             autoFocus
           />
-          <TouchableOpacity style={styles.actionButton} onPress={() => {}}>
-            <Paragraph style={styles.actionText}>
-              <Icon name="arrowDown" size={16} />
-              <Paragraph variant="sm">reply</Paragraph>
-            </Paragraph>
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => { }}>
+            <View style={styles.replyTab}>
+              <Icon
+                name="arrowDown"
+                size={16}
+                color={theme.colors.snow}
+              />
+              <Paragraph style={styles.actionText}>
+                  reply
+              </Paragraph>
+            </View>
           </TouchableOpacity>
         </View>
       )}
-      
+
       {comment.replies.map((reply) => (
-        <CommentItem key={reply.commentId} comment={reply} level={level + 1 } />
+        <CommentItem
+          key={reply.commentId}
+          comment={reply}
+          level={level + 1}
+        />
       ))}
     </View>
+
+     
   );
 };
 
@@ -130,6 +154,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: 300,
     borderRadius: 5,
+  },
+  replyTab: {
+    display: "flex",
+    flexDirection: "row",
+    gap:2
   },
   editableText: {
     fontSize: 14,
@@ -152,12 +181,12 @@ const styles = StyleSheet.create({
   actionText: {
     fontSize: theme.fontSize.sm,
     color: theme.colors.snow,
-    letterSpacing:0.75,
+    letterSpacing: 0.75,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding:12,
+    padding: 12,
     gap: 4,
     marginBottom: 5,
     marginTop: 5,

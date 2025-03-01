@@ -6,7 +6,7 @@ import { posts } from '@/features/post/api/mockData';
 import { users } from '@/features/user/api/mockData';
 import { postLikes } from '@/features/likes/api/likeMockData';
 import { comments } from '@/features/comments/api/commentMockData';
-import { postShares } from '@/features/comments/api/shareMockData';
+import { postShares } from '@/features/shares/api/shareMockData';
 
 const Home = () => {
   const loggedInUserId = "1001";

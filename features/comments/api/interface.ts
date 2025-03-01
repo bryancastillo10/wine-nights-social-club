@@ -13,9 +13,3 @@ export interface IComments extends BasePostActions{
 export interface INestedComments extends IComments {
     replies: INestedComments[];
 }
-
-
-export interface IPostShare extends BasePostActions {
-    shareId: string;
-    caption: string;
-}

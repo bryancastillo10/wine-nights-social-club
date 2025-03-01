@@ -7,7 +7,9 @@ interface CommentBlockProps {
   comments: INestedComments[];
 }
 
-const CommentBlock = ({comments}: CommentBlockProps) => {
+const CommentBlock = (props: CommentBlockProps) => {
+  const { comments } = props;
+
   return (
     <ScrollView style={styles.container}>
     {comments.map((comment) => (

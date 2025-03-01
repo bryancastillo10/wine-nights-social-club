@@ -89,7 +89,9 @@ const PostCard = (props: PostCardProps) => {
                     isOpen={isCommentOpen}
                     toggleOpen={toggleIsCommentOpen}
                 >     
-                    <CommentBlock comments={commentsData}/>    
+                    <CommentBlock
+                        comments={commentsData}
+                    />    
                 </BottomSheetContainer>
             )}
         </View>
