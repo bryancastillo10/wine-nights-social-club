@@ -3,6 +3,8 @@ import { theme } from '@/style/theme'
 import Home from './Home'
 import ArrowRight from './ArrowRight'
 import ArrowLeft from './ArrowLeft'
+import ArrowUp from './ArrowUp'
+import ArrowDown from './ArrowDown'
 import Call from './Call'
 import Comment from './Comment'
 import Camera from './Camera'
@@ -33,6 +35,8 @@ export const icons = {
   home: Home,
   arrowLeft: ArrowLeft,
   arrowRight: ArrowRight,
+  arrowUp: ArrowUp,
+  arrowDown: ArrowDown,
   call: Call,
   comment: Comment,
   camera: Camera,
