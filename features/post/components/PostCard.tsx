@@ -16,6 +16,7 @@ import { timeElapsed } from '@/utils/formatElapsedTime';
 
 import BottomSheetContainer from '@/components/layout/BottomSheetContainer';
 import CommentBlock from '@/features/post/components/CommentBlock';
+import { INestedComments } from '@/features/postActions/api/interface';
 
 const PostCard = (props: PostCardProps) => {
     const {
@@ -29,13 +30,15 @@ const PostCard = (props: PostCardProps) => {
         handleEdit,
         handleDelete
     } = props;
-    
+    const [commentsData, setCommentsData ] = useState<INestedComments[]>(comments);
     const [isMoreOpen, setIsMoreOpen] = useState<boolean>(false);
     const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
     
     const toggleMoreOpen = () => { setIsMoreOpen(!isMoreOpen); };
     const toggleIsCommentOpen = () => { setIsCommentOpen(!isCommentOpen) };
   
+
+    
     return (
         <View style={cardStyles.postContainer}>
             <View style={cardStyles.avatarSection}>
@@ -88,7 +91,7 @@ const PostCard = (props: PostCardProps) => {
                     isOpen={isCommentOpen}
                     toggleOpen={toggleIsCommentOpen}
                 >     
-                    <CommentBlock comments={comments}/>    
+                    <CommentBlock comments={commentsData}/>    
                 </BottomSheetContainer>
             )}
         </View>

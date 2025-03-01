@@ -3,6 +3,8 @@ import { theme } from '@/style/theme'
 import Home from './Home'
 import ArrowRight from './ArrowRight'
 import ArrowLeft from './ArrowLeft'
+import ArrowUp from './ArrowUp'
+import ArrowDown from './ArrowDown'
 import Call from './Call'
 import Comment from './Comment'
 import Camera from './Camera'
@@ -27,11 +29,14 @@ import Drink from './Drink'
 import Fingerprint from './Fingerprint'
 import AllUsers from './AllUsers'
 import Music from './Music'
+import Time from './Time'
 
 export const icons = {
   home: Home,
   arrowLeft: ArrowLeft,
   arrowRight: ArrowRight,
+  arrowUp: ArrowUp,
+  arrowDown: ArrowDown,
   call: Call,
   comment: Comment,
   camera: Camera,
@@ -55,7 +60,8 @@ export const icons = {
   bell: Bell,
   fingerprint: Fingerprint,
   allusers: AllUsers,
-  music: Music  
+  music: Music,  
+  time: Time
 }
 
 interface IIcon {

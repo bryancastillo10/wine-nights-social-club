@@ -18,7 +18,7 @@ export const theme = {
   // text: standard gray for text
   text: "#494949",
   // textLight: lighter text gray
-  textLight: "#7C7C7C",
+  textLight: "#D3D3D3",
   // textDark: very dark text
   textDark: "#1D1D1D",
   

@@ -1,5 +1,6 @@
 import MainPageContainer from '@/components/layout/MainPageContainer'
 import PostCard from '@/features/post/components/PostCard'
+import { countNestedComments } from '@/features/postActions/utils/countNestedComments';
 
 import { posts } from '@/features/post/api/mockData';
 import { users } from '@/features/user/api/mockData';
@@ -18,7 +19,8 @@ const Home = () => {
         
         // Calculating like,comment, & share counts per post
         const likesCount = postLikes.filter(like => like.postId === post.postId).length;
-        const commentsCount = comments.filter(comment => comment.postId === post.postId).length;
+
+        const commentsCount = countNestedComments(comments, post.postId)
         const sharesCount = postShares.filter(share => share.postId === post.postId).length;
      
         // Comment Per Post

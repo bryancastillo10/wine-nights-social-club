@@ -8,7 +8,7 @@ export const notifications = [
     commentId: "3000-1",
     type: "comment",
     isRead: false,
-    createdAt: "2025-01-16T08:00:00Z"
+    createdAt: "2025-02-20T08:00:00Z"
   },
   // 2) Ysa replies to Thea's comment (which is on Bryan's post) -> Bryan might also receive a notification
   {
@@ -19,7 +19,7 @@ export const notifications = [
     commentId: "3000-2",
     type: "comment",
     isRead: false,
-    createdAt: "2025-01-16T08:15:00Z"
+    createdAt: "2025-02-20T08:15:00Z"
   },
   // 3) Bryan replies back -> Thea gets a comment notification 
   {
@@ -30,7 +30,7 @@ export const notifications = [
     commentId: "3000-3",
     type: "comment",
     isRead: false,
-    createdAt: "2025-01-16T08:30:00Z"
+    createdAt: "2025-02-20T08:30:00Z"
   },
   // 4) Bryan comments on Thea’s second post -> Thea gets a notification
   {
@@ -41,7 +41,7 @@ export const notifications = [
     commentId: "3000-4",
     type: "comment",
     isRead: false,
-    createdAt: "2025-02-17T09:00:00Z"
+    createdAt: "2025-02-20T09:00:00Z"
   },
   // 5) Ysa shares Thea’s post -> Thea gets a notification
   {
@@ -52,6 +52,6 @@ export const notifications = [
     commentId: null,        
     type: "share",
     isRead: false,
-    createdAt: "2025-02-14T10:20:00Z"
+    createdAt: "2025-02-20T10:20:00Z"
   }
 ];
