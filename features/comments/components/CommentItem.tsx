@@ -1,18 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   View,
   TextInput,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { INestedComments } from '@/features/comments/api/interface';
+
 import { Paragraph } from '@/components/typography';
-import { INestedComments } from '@/features/postActions/api/interface';
+
 import { theme } from '@/style/theme';
 import Icon from '@/assets/icons';
-import { Avatar } from '@/components/ui';
-import { getUserById } from '@/utils/getUserById';
-import { wp } from '@/utils/dimensions';
-import { timeElapsed } from '@/utils/formatElapsedTime';
+
+import CommentDetails from './CommentHeader';
 
 interface CommentItemProps {
   comment: INestedComments;
@@ -25,8 +25,6 @@ const CommentItem = ({ comment, level = 0 }: CommentItemProps) => {
   const [showReplyInput, setShowReplyInput] = useState(false);
   const inputRef = useRef<TextInput>(null);
   
-  const userComment = getUserById(comment.userId);
-
   useEffect(() => {
     if (editMode && inputRef.current) {
       inputRef.current.focus();
@@ -45,19 +43,11 @@ const CommentItem = ({ comment, level = 0 }: CommentItemProps) => {
             autoFocus
           />
         ) : (
-            <>
-              <View style={styles.commentHeader}>
-                <View style={styles.userInfo}>
-                  <Avatar source={userComment?.profilePic} />
-                  <Paragraph variant="lg">{userComment?.username}</Paragraph>
-                </View>
-                <View style={styles.time}>
-                  <Icon name="time" size={20} />
-                  <Paragraph variant="sm">{timeElapsed(comment.createdAt)}</Paragraph>
-                </View>
-              </View>
-              <Paragraph>{comment.textComment}</Paragraph>
-            </>
+            <CommentDetails
+              userId={comment.userId}
+              createdAt={comment.createdAt}
+              textComment={comment.textComment}              
+            />
         )}
         <View style={styles.actionContainer}>
           {editMode ? (
@@ -113,7 +103,10 @@ const CommentItem = ({ comment, level = 0 }: CommentItemProps) => {
             autoFocus
           />
           <TouchableOpacity style={styles.actionButton} onPress={() => {}}>
-            <Paragraph style={styles.actionText}>REPLY</Paragraph>
+            <Paragraph style={styles.actionText}>
+              <Icon name="arrowDown" size={16} />
+              <Paragraph variant="sm">reply</Paragraph>
+            </Paragraph>
           </TouchableOpacity>
         </View>
       )}
@@ -137,25 +130,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: 300,
     borderRadius: 5,
-  },
-  commentHeader: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems:"center",
-    justifyContent: "space-between",
-    marginRight: wp(2)
-  },
-  userInfo: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-    gap: wp(4)
-  },
-  time: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems:"center",
-    gap: 4
   },
   editableText: {
     fontSize: 14,

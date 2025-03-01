@@ -5,7 +5,7 @@ import Avatar from '@/components/ui/Avatar';
 import { Paragraph } from '@/components/typography';
 
 import PostDetails from '@/features/post/components/PostDetails';
-import ActionRow from '@/features/postActions/components/ActionRow';
+import ActionRow from '@/features/comments/components/ActionRow';
 
 import Icon from '@/assets/icons';
 import { cardStyles } from '@/style/main/postCard.style';
@@ -16,7 +16,7 @@ import { timeElapsed } from '@/utils/formatElapsedTime';
 
 import BottomSheetContainer from '@/components/layout/BottomSheetContainer';
 import CommentBlock from '@/features/post/components/CommentBlock';
-import { INestedComments } from '@/features/postActions/api/interface';
+import { INestedComments } from '@/features/comments/api/interface';
 
 const PostCard = (props: PostCardProps) => {
     const {
@@ -37,8 +37,6 @@ const PostCard = (props: PostCardProps) => {
     const toggleMoreOpen = () => { setIsMoreOpen(!isMoreOpen); };
     const toggleIsCommentOpen = () => { setIsCommentOpen(!isCommentOpen) };
   
-
-    
     return (
         <View style={cardStyles.postContainer}>
             <View style={cardStyles.avatarSection}>

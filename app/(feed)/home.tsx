@@ -1,12 +1,12 @@
 import MainPageContainer from '@/components/layout/MainPageContainer'
 import PostCard from '@/features/post/components/PostCard'
-import { countNestedComments } from '@/features/postActions/utils/countNestedComments';
+import { countNestedComments } from '@/features/comments/utils/countNestedComments';
 
 import { posts } from '@/features/post/api/mockData';
 import { users } from '@/features/user/api/mockData';
-import { postLikes } from '@/features/postActions/api/likeMockData';
-import { comments } from '@/features/postActions/api/commentMockData';
-import { postShares } from '@/features/postActions/api/shareMockData';
+import { postLikes } from '@/features/likes/api/likeMockData';
+import { comments } from '@/features/comments/api/commentMockData';
+import { postShares } from '@/features/comments/api/shareMockData';
 
 const Home = () => {
   const loggedInUserId = "1001";

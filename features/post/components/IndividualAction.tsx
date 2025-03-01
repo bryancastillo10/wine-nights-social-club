@@ -5,13 +5,13 @@ import Icon, { icons } from '@/assets/icons'
 import { Paragraph } from '@/components/typography'
 import { theme } from '@/style/theme';
 
-interface PostActionProps {
+interface IndividualActionProps {
   icon: keyof typeof icons;
   onPress?: () => void;
   count?: number;
 };
 
-const IndividualAction = ({icon,onPress,count}: PostActionProps) => {
+const IndividualAction = ({icon,onPress,count}: IndividualActionProps) => {
   return (
     <View style={styles.actionContainer}>
       <Pressable onPress={onPress}>

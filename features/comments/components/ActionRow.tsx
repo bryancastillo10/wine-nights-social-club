@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native'
 
-import IndividualAction from '@/features/postActions/components/IndividualAction';
+import IndividualAction from '@/features/comments/components/IndividualAction';
 
 export interface ActionRowProps{
   likesCount: number;

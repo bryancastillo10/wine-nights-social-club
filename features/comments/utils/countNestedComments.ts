@@ -1,4 +1,4 @@
-import { INestedComments } from "@/features/postActions/api/interface";
+import { INestedComments } from "@/features/comments/api/interface";
 
 export const countNestedComments = (comments: INestedComments[], postId: string): number => {
   const topLevelComments = comments.filter(comment => comment.postId === postId);
